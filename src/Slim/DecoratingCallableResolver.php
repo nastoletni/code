@@ -11,7 +11,14 @@ use Slim\Interfaces\CallableResolverInterface;
 
 class DecoratingCallableResolver implements CallableResolverInterface
 {
+    /**
+     * @var CallableResolver
+     */
     private $callableResolver;
+
+    /**
+     * @var ControllerDecorator
+     */
     private $controllerDecorator;
 
     /**

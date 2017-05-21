@@ -10,7 +10,14 @@ use Exception;
 
 class LoggingErrorHandler
 {
+    /**
+     * @var LoggerInterface
+     */
     private $logger;
+
+    /**
+     * @var callable|null
+     */
     private $nextHandler;
 
     /**

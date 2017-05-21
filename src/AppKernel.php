@@ -16,7 +16,9 @@ use Symfony\Component\Yaml\Yaml;
 
 class AppKernel
 {
-    private $environment;
+    /**
+     * @var App
+     */
     private $slim;
 
     /**

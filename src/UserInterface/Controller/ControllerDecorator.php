@@ -8,7 +8,14 @@ use Slim\Views\Twig;
 
 class ControllerDecorator
 {
+    /**
+     * @var Twig
+     */
     private $twig;
+
+    /**
+     * @var RouterInterface
+     */
     private $router;
 
     /**

@@ -8,7 +8,14 @@ use Slim\Views\Twig;
 
 abstract class AbstractController
 {
+    /**
+     * @var Twig
+     */
     protected $twig;
+
+    /**
+     * @var RouterInterface
+     */
     protected $router;
 
     /**
