@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>{% block title %}Code{% endblock %}</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header class="page-header">
+            <div class="page-header--container">
+                <h1 class="page-header--title">
+                    <a href="{{ base_url() }}" class="page-header--title-link">
+                        <img src="https://nastoletni.pl/wp-content/themes/nastoletnitheme/imgs/logo.svg" alt="" class="page-header--logo-image">
+                        Code
+                    </a>
+                </h1>
+                <nav class="page-header--navigation page-nav">
+                    <h2 class="page-nav--title">Nawigacja</h2>
+                    <ul class="page-nav--links">
+                        <li class="page-nav--links-item"><a href="#" class="page-nav--link page-nav--link__active">Dodaj nowy</a></li>
+                        <li class="page-nav--links-item"><a href="#" class="page-nav--link">Powrót na nastoletni.pl</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="main">
+            {% block main '' %}
+        </main>
+    </body>
+</html>

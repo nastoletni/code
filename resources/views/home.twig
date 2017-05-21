@@ -1,0 +1,19 @@
+{% extends 'layout.twig' %}
+
+{% block main %}
+    <h2 class="main--title">Dodaj nowy</h2>
+    <form action="?" method="post" class="code-form">
+        <label for="title" class="code-form--label">Tytuł wklejki</label>
+        <input type="text" id="title" name="title" class="code-form--control code-form--control__title" placeholder="Na przykład: Zadanie #7 na SPOJu" required>
+        <fieldset class="code-form--file" data-index="0">
+            <label for="name[0]" class="code-form--label">Nazwa pliku (opcjonalna)</label>
+            <input type="text" id="name[0]" name="name[0]" class="code-form--control" placeholder="Na przykład: main.cpp">
+            <label for="content[0]" class="code-form--label">Treść pliku</label>
+            <textarea name="content[0]" id="content[0]" rows="10" class="code-form--control code-form--control__textarea" required></textarea>
+        </fieldset>
+        <div class="code-form--button-group">
+            <button type="button" id="new-file" class="code-form--button">Dodaj kolejny plik</button>
+            <input type="submit" value="Dodaj wklejkę" class="code-form--button code-form--button__submit">
+        </div>
+    </form>
+{% endblock %}
