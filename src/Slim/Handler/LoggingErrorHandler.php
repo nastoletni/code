@@ -7,6 +7,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Exception;
+use Throwable;
 
 class LoggingErrorHandler
 {
@@ -37,10 +38,10 @@ class LoggingErrorHandler
      *
      * @param Request $request
      * @param Response $response
-     * @param Exception $exception
+     * @param Throwable $exception
      * @return Response
      */
-    public function __invoke(Request $request, Response $response, Exception $exception): Response
+    public function __invoke(Request $request, Response $response, Throwable $exception): Response
     {
         $this->logger->critical($exception);
 
