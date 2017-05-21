@@ -1,0 +1,4 @@
+home:
+  method: GET
+  path: /
+  controller: '\Nastoletni\Code\UserInterface\Web\Controller\PasteController:home'
