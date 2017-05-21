@@ -1,3 +1,5 @@
+/.idea/
+
 /vendor/
 /src/config.yml
 /logs.log
