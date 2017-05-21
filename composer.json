@@ -22,5 +22,10 @@
             "Nastoletni\\Code\\": "tests/"
         }
     },
-    "license": "MIT"
+    "license": "MIT",
+    "scripts": {
+        "test": [
+            "\"vendor/bin/phpunit\""
+        ]
+    }
 }
