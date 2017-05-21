@@ -9,7 +9,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class PasteController extends AbstractController
 {
-    public function home(Request $request, Response $response)
+    public function home(Request $request, Response $response): Response
     {
         return $response->getBody()->write('Paste controller, home action');
     }
