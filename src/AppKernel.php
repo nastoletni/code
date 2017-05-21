@@ -12,6 +12,7 @@ use Slim\Container;
 use Slim\Handlers\Error;
 use Slim\Handlers\PhpError;
 use Slim\Views\Twig;
+use Slim\Views\TwigExtension;
 use Symfony\Component\Yaml\Yaml;
 
 class AppKernel
@@ -50,9 +51,12 @@ class AppKernel
             );
         };
         $container['twig'] = function (Container $container) {
-            return new Twig(__DIR__.'/../resources/views/', [
+            $twig = new Twig(__DIR__.'/../resources/views/', [
                 'debug' => $container['config']['debug']
             ]);
+            $twig->addExtension(new TwigExtension($container['router'], $container['config']['base_url']));
+
+            return $twig;
         };
         $container['callableResolver'] = function (Container $container) {
             return new DecoratingCallableResolver(
