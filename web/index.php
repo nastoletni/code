@@ -6,8 +6,6 @@ use Nastoletni\Code\AppKernel;
 
 require '../vendor/autoload.php';
 
-$environment = Environment::createFromGlobals();
-
-$kernel = new AppKernel($environment);
+$kernel = new AppKernel();
 
 $kernel->handle();
