@@ -21,7 +21,7 @@ class Environment {
      *
      * @return Environment
      */
-    public static function createFromGlobals()
+    public static function createFromGlobals(): Environment
     {
         $debug = in_array($_SERVER['REMOTE_ADDR'], ['::1', '127.0.0.1']);
 
@@ -33,7 +33,7 @@ class Environment {
      *
      * @return bool
      */
-    public function getDebug()
+    public function getDebug(): bool
     {
         return $this->debug;
     }
