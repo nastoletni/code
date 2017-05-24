@@ -11,6 +11,7 @@ use Slim\App;
 use Slim\Container;
 use Slim\Handlers\Error;
 use Slim\Handlers\PhpError;
+use Slim\Handlers\Strategies\RequestResponseArgs;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use Symfony\Component\Yaml\Yaml;
@@ -37,6 +38,9 @@ class AppKernel
             return new Logger('application', [
                 new StreamHandler(__DIR__.'/../logs.log')
             ]);
+        };
+        $container['foundHandler'] = function () {
+            return new RequestResponseArgs();
         };
         $container['errorHandler'] = function (Container $container) {
             return new Slim\Handler\LoggingErrorHandler(
