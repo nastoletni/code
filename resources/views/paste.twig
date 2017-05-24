@@ -1,0 +1,24 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/mono-blue.min.css">
+{% endblock %}
+
+{% block main %}
+    <main class="main">
+        <h2>{{ paste.title }}</h2>
+        {% for file in paste.files %}
+            <section class="panel">
+                <header class="panel-header">
+                    <h3 class="panel-title">{{ file.name|default('Bez tytułu') }}</h3>
+                </header>
+                <pre><code>{{ file.contents }}</code></pre>
+            </section>
+        {% endfor %}
+    </main>
+{% endblock %}
+
+{% block js %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}

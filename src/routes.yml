@@ -2,3 +2,7 @@ home:
   method: GET
   path: /
   controller: '\Nastoletni\Code\UserInterface\Web\Controller\PasteController:home'
+paste:
+  method: GET
+  path: /{id}
+  controller: '\Nastoletni\Code\UserInterface\Web\Controller\PasteController:paste'
