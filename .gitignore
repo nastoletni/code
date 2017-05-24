@@ -1,5 +1,7 @@
 /.idea/
 
+/node_modules/
 /vendor/
 /src/config.yml
 /logs.log
+/web/style.css
