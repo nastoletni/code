@@ -3,10 +3,16 @@ declare(strict_types=1);
 
 namespace Nastoletni\Code;
 
+use Doctrine\DBAL\Configuration;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DriverManager;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Nastoletni\Code\Application\PasteMapper;
+use Nastoletni\Code\Infrastructure\Dbal\DbalPasteRepository;
 use Nastoletni\Code\Slim\DecoratingCallableResolver;
 use Nastoletni\Code\UserInterface\Controller\ControllerDecorator;
+use Nastoletni\Code\UserInterface\Web\Controller\PasteController;
 use Slim\App;
 use Slim\Container;
 use Slim\Handlers\Error;
@@ -45,13 +51,13 @@ class AppKernel
         $container['errorHandler'] = function (Container $container) {
             return new Slim\Handler\LoggingErrorHandler(
                 $container->get('logger'),
-                new Error()
+                new Error($container['config']['debug'])
             );
         };
         $container['phpErrorHandler'] = function (Container $container) {
             return new Slim\Handler\LoggingErrorHandler(
                 $container->get('logger'),
-                new PhpError()
+                new PhpError($container['config']['debug'])
             );
         };
         $container['twig'] = function (Container $container) {
@@ -70,6 +76,24 @@ class AppKernel
                     $container['router']
                 )
             );
+        };
+
+        $container['dbal'] = function (Container $container) {
+            $config = new Configuration();
+
+            return DriverManager::getConnection([
+                'driver' => 'pdo_mysql',
+                'host' => $container['config']['database']['host'],
+                'dbname' => $container['config']['database']['name'],
+                'user' => $container['config']['database']['user'],
+                'password' => $container['config']['database']['password'],
+                'charset' => $container['config']['database']['charset'],
+            ], $config);
+        };
+        $container[PasteController::class] = function (Container $container) {
+            $pasteRepository = new DbalPasteRepository($container['dbal'], new PasteMapper());
+
+            return new PasteController($pasteRepository);
         };
 
         $this->setupRoutes();

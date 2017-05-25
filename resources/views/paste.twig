@@ -10,9 +10,9 @@
         {% for file in paste.files %}
             <section class="panel">
                 <header class="panel-header">
-                    <h3 class="panel-title">{{ file.name|default('Bez tytułu') }}</h3>
+                    <h3 class="panel-title">{{ file.filename|default('Bez tytułu') }}</h3>
                 </header>
-                <pre><code>{{ file.contents }}</code></pre>
+                <pre><code>{{ file.content }}</code></pre>
             </section>
         {% endfor %}
     </main>
