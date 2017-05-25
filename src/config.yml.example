@@ -4,7 +4,7 @@ database:
   host: '127.0.0.1'
   port: '3306'
   name: 'nastoletni-code'
-  username: 'root'
+  user: 'root'
   password: ''
   charset: 'utf8mb4_unicode_ci'
   aes_key: '' # random 32bit hexadecimal key
