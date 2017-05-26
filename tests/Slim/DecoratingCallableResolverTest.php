@@ -60,7 +60,6 @@ class DecoratingCallableResolverTest extends TestCase
 
     public function testResolveWithChildOfAbstractControllerWithMethod()
     {
-        // FIXME: DRY, look at getContainerWithClassMethod()
         $controller = new class extends AbstractController {
             public function home(
                 ServerRequestInterface $request,
