@@ -41,7 +41,7 @@ class DbalPasteRepository implements PasteRepository
     public function getById(Paste\Id $id): Paste
     {
         $qb = $this->dbal->createQueryBuilder()
-            ->select('p.id', 'p.title', 'p.created_at', 'f.id AS file_id', 'f.filename', 'f.content')
+            ->select('p.id', 'p.title', 'p.created_at', 'f.filename', 'f.content')
             ->from('pastes', 'p')
             ->innerJoin('p', 'files', 'f', 'f.paste_id = p.id')
             ->where('p.id = :id')
@@ -55,19 +55,7 @@ class DbalPasteRepository implements PasteRepository
 
         $data = $query->fetchAll();
 
-        // TODO: Move this shit to mapper
-        $correctData['id'] = $data[0]['id'];
-        $correctData['title'] = $data[0]['title'];
-        $correctData['created_at'] = $data[0]['created_at'];
-        foreach ($data as $item) {
-            $correctData['files'][] = [
-                'id' => $item['file_id'],
-                'filename' => $item['filename'],
-                'content' => $item['content']
-            ];
-        }
-
-        return $this->mapper->map($correctData);
+        return $this->mapper->map($data);
     }
 
     /**

@@ -19,20 +19,19 @@ class PasteMapperTest extends TestCase
         $mapper = new PasteMapper();
 
         $validData = [
-            'id' => 438643,
-            'title' => null,
-            'created_at' => '2017-05-25 20:33:54',
-            'files' => [
-                [
-                    'id' => 15,
-                    'filename' => 'foo.php',
-                    'content' => '<?= "test"; ?>'
-                ],
-                [
-                    'id' => 16,
-                    'filename' => '',
-                    'content' => 'test'
-                ]
+            [
+                'id' => 438643,
+                'title' => null,
+                'created_at' => '2017-05-25 20:33:54',
+                'filename' => 'foo.php',
+                'content' => '<?= "test"; ?>'
+            ],
+            [
+                'id' => 438643,
+                'title' => null,
+                'created_at' => '2017-05-25 20:33:54',
+                'filename' => '',
+                'content' => 'test'
             ]
         ];
 
@@ -42,7 +41,6 @@ class PasteMapperTest extends TestCase
         $this->assertNull($paste->getTitle());
         $this->assertEquals('2017-05-25 20:33:54', $paste->getCreatedAt()->format('Y-m-d H:i:s'));
         $this->assertNotEmpty($paste->getFiles());
-        $this->assertEquals(15, $paste->getFiles()[0]->getId());
         $this->assertEquals('foo.php', $paste->getFiles()[0]->getFilename());
         $this->assertEquals('<?= "test"; ?>', $paste->getFiles()[0]->getContent());
         $this->assertNull($paste->getFiles()[1]->getFilename());
@@ -62,47 +60,26 @@ class PasteMapperTest extends TestCase
     public function invalidDataProvider()
     {
         return [
-            [[
-            ]],
-            [[
+            [[[
+            ]]],
+            [[[
                 'id' => 1
-            ]],
-            [[
+            ]]],
+            [[[
                 'id' => 1,
                 'title' => 'test'
-            ]],
-            [[
+            ]]],
+            [[[
                 'id' => 1,
                 'title' => 'test',
                 'created_at' => ''
-            ]],
-            [[
+            ]]],
+            [[[
                 'id' => 1,
                 'title' => 'test',
                 'created_at' => '',
-                'files' => []
-            ]],
-            [[
-                'id' => 1,
-                'title' => 'test',
-                'created_at' => '',
-                'files' => [
-                    [
-                        'id' => 1
-                    ]
-                ]
-            ]],
-            [[
-                'id' => 1,
-                'title' => 'test',
-                'created_at' => '',
-                'files' => [
-                    [
-                        'id' => 1,
-                        'filename' => 'test'
-                    ]
-                ]
-            ]]
+                'filename' => 'test'
+            ]]]
         ];
     }
 }

@@ -20,14 +20,13 @@ class PasteMapper
         $this->validateData($data);
 
         $paste = new Paste(
-            Paste\Id::createFromBase10((int) $data['id']),
-            empty($data['title']) ? null : $data['title'],
-            new DateTime($data['created_at'])
+            Paste\Id::createFromBase10((int) $data[0]['id']),
+            empty($data[0]['title']) ? null : $data[0]['title'],
+            new DateTime($data[0]['created_at'])
         );
 
-        foreach ($data['files'] as $file) {
+        foreach ($data as $file) {
             $file = new File(
-                (int) $file['id'],
                 empty($file['filename']) ? null : $file['filename'],
                 $file['content']
             );
@@ -46,11 +45,11 @@ class PasteMapper
      */
     private function validateData(array $data): void
     {
-        $pasteRequiredFields = ['id', 'title', 'created_at', 'files'];
-        $fileRequiredFields = ['id', 'filename', 'content'];
+        $pasteRequiredFields = ['id', 'title', 'created_at'];
+        $fileRequiredFields = ['filename', 'content'];
 
         foreach ($pasteRequiredFields as $pasteRequiredField) {
-            if (!array_key_exists($pasteRequiredField, $data)) {
+            if (!array_key_exists($pasteRequiredField, $data[0])) {
                 throw new InvalidDataException(sprintf(
                     'Given data has to have \'%s\' key.',
                     $pasteRequiredField
@@ -58,11 +57,7 @@ class PasteMapper
             }
         }
 
-        if (empty($data['files'])) {
-            throw new InvalidDataException('Given data don\'t have any files.');
-        }
-
-        foreach ($data['files'] as $file) {
+        foreach ($data as $file) {
             foreach ($fileRequiredFields as $fileRequiredField) {
                 if (!array_key_exists($fileRequiredField, $file)) {
                     throw new InvalidDataException(sprintf(
