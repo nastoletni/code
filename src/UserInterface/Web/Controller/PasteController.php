@@ -28,6 +28,8 @@ class PasteController extends AbstractController
     }
 
     /**
+     * home: GET /
+     *
      * @param Request $request
      * @param Response $response
      * @return Response
@@ -38,6 +40,8 @@ class PasteController extends AbstractController
     }
 
     /**
+     * paste: GET /{id}
+     *
      * @param Request $request
      * @param Response $response
      * @param string $id
