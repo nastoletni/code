@@ -42,7 +42,7 @@ class AppKernel
         $container['settings']['displayErrorDetails'] = $container['config']['debug'];
         $container['logger'] = function () {
             return new Logger('application', [
-                new StreamHandler(__DIR__.'/../logs.log')
+                new StreamHandler(__DIR__.'/../logs/logs.log')
             ]);
         };
         $container['foundHandler'] = function () {
