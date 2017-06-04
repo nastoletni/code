@@ -12,7 +12,7 @@
         <header class="page-navbar">
             <div class="page-navbar--container">
                 <h1 class="page-navbar--title">
-                    <a href="{{ base_url() }}" class="page-navbar--title-link">
+                    <a href="{{ path_for('home') }}" class="page-navbar--title-link">
                         <img src="https://nastoletni.pl/wp-content/themes/nastoletnitheme/imgs/logo.svg" alt="" class="page-navbar--logo-image">
                         Code
                     </a>
@@ -20,8 +20,8 @@
                 <nav class="page-navbar--navigation page-navbar-nav">
                     <h2 class="page-navbar-nav--title">Nawigacja</h2>
                     <ul class="page-navbar-nav--links">
-                        <li class="page-navbar-nav--links-item"><a href="#" class="page-navbar-nav--link page-navbar-nav--link__active">Dodaj nowy</a></li>
-                        <li class="page-navbar-nav--links-item"><a href="#" class="page-navbar-nav--link">Powrót na nastoletni.pl</a></li>
+                        <li class="page-navbar-nav--links-item"><a href="{{ path_for('home') }}" class="page-navbar-nav--link page-navbar-nav--link__active">Dodaj nowy</a></li>
+                        <li class="page-navbar-nav--links-item"><a href="https://nastoletni.pl" class="page-navbar-nav--link">Powrót na nastoletni.pl</a></li>
                     </ul>
                 </nav>
             </div>
