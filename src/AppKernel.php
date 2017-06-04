@@ -4,11 +4,10 @@ declare(strict_types=1);
 namespace Nastoletni\Code;
 
 use Doctrine\DBAL\Configuration;
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use Nastoletni\Code\Application\PasteMapper;
+use Nastoletni\Code\Infrastructure\Dbal\DbalPasteMapper;
 use Nastoletni\Code\Infrastructure\Dbal\DbalPasteRepository;
 use Nastoletni\Code\Slim\DecoratingCallableResolver;
 use Nastoletni\Code\UserInterface\Controller\ControllerDecorator;
@@ -91,7 +90,7 @@ class AppKernel
             ], $config);
         };
         $container[PasteController::class] = function (Container $container) {
-            $pasteRepository = new DbalPasteRepository($container['dbal'], new PasteMapper());
+            $pasteRepository = new DbalPasteRepository($container['dbal'], new DbalPasteMapper());
 
             return new PasteController($pasteRepository);
         };

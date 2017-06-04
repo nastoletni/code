@@ -6,7 +6,6 @@ namespace Nastoletni\Code\Infrastructure\Dbal;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
 use Doctrine\DBAL\DBALException;
-use Nastoletni\Code\Application\PasteMapper;
 use Nastoletni\Code\Domain\Paste;
 use Nastoletni\Code\Domain\PasteRepository;
 use PDO;
@@ -19,7 +18,7 @@ class DbalPasteRepository implements PasteRepository
     private $dbal;
 
     /**
-     * @var PasteMapper
+     * @var DbalPasteMapper
      */
     private $mapper;
 
@@ -27,9 +26,9 @@ class DbalPasteRepository implements PasteRepository
      * DbalPasteRepository constructor.
      *
      * @param Connection $dbal
-     * @param PasteMapper $mapper
+     * @param DbalPasteMapper $mapper
      */
-    public function __construct(Connection $dbal, PasteMapper $mapper)
+    public function __construct(Connection $dbal, DbalPasteMapper $mapper)
     {
         $this->dbal = $dbal;
         $this->mapper = $mapper;

@@ -1,13 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Nastoletni\Code\Application;
+namespace Nastoletni\Code\Infrastructure\Dbal;
 
 use DateTime;
+use Nastoletni\Code\Application\InvalidDataException;
 use Nastoletni\Code\Domain\File;
 use Nastoletni\Code\Domain\Paste;
 
-class PasteMapper
+class DbalPasteMapper
 {
     /**
      * Maps array to Paste entity.

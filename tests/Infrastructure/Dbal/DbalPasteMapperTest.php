@@ -1,22 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Adam
- * Date: 2017-05-25
- * Time: 20:29
- */
 
 namespace Nastoletni\Code\Application;
 
 use DateTime;
+use Nastoletni\Code\Infrastructure\Dbal\DbalPasteMapper;
 use PHPUnit\Framework\TestCase;
 use Nastoletni\Code\Application\InvalidDataException;
 
-class PasteMapperTest extends TestCase
+class DbalPasteMapperTest extends TestCase
 {
     public function testMappingValidData()
     {
-        $mapper = new PasteMapper();
+        $mapper = new DbalPasteMapper();
 
         $validData = [
             [
@@ -52,7 +47,7 @@ class PasteMapperTest extends TestCase
      */
     public function testMappingThrowsExceptionWithInvalidData($data)
     {
-        $mapper = new PasteMapper();
+        $mapper = new DbalPasteMapper();
 
         $mapper->map($data);
     }
