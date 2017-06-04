@@ -6,5 +6,5 @@ database:
   name: 'nastoletni-code'
   user: 'root'
   password: ''
-  charset: 'utf8mb4_unicode_ci'
+  charset: 'utf8'
   aes_key: '' # random 32bit hexadecimal key
