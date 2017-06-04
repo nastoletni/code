@@ -70,7 +70,7 @@ class DbalPasteRepository implements PasteRepository
             $this->dbal->insert('pastes', [
                 'id' => $paste->getId()->getBase10Id(),
                 'title' => $paste->getTitle(),
-                'created_at' => $paste->getCreatedAt()
+                'created_at' => $paste->getCreatedAt()->format('Y-m-d H:i:s')
             ], [PDO::PARAM_INT, PDO::PARAM_STR, PDO::PARAM_STR]);
         } catch (DBALException $e) {
             /** @see https://dev.mysql.com/doc/refman/5.7/en/error-messages-server.html#error_er_dup_entry */
