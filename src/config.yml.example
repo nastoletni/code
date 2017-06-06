@@ -7,4 +7,3 @@ database:
   user: 'root'
   password: ''
   charset: 'utf8'
-  aes_key: '' # random 32bit hexadecimal key
