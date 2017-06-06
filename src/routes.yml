@@ -2,6 +2,12 @@ home:
   method: GET
   path: /
   controller: 'Nastoletni\Code\UserInterface\Web\Controller\PasteController:home'
+
+create:
+  method: POST
+  path: /
+  controller: 'Nastoletni\Code\UserInterface\Web\Controller\PasteController:create'
+
 paste:
   method: GET
   path: /{id}

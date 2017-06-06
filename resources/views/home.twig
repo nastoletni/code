@@ -4,7 +4,7 @@
     <main class="main">
         <section class="panel panel-content">
             <h2 class="panel-title">Dodaj nowy</h2>
-            <form action="?" method="post" class="code-form">
+            <form action="{{ path_for('create') }}" method="post" class="code-form">
                 <label for="title" class="code-form--label">Tytuł wklejki</label>
                 <input type="text" id="title" name="title" class="code-form--control code-form--control__title" placeholder="Na przykład: Zadanie #7 na SPOJu" required>
                 <fieldset class="code-form--file" data-index="0">
