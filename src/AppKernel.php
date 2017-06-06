@@ -7,6 +7,7 @@ use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Nastoletni\Code\Infrastructure\AES256Crypter;
 use Nastoletni\Code\Infrastructure\Dbal\DbalPasteMapper;
 use Nastoletni\Code\Infrastructure\Dbal\DbalPasteRepository;
 use Nastoletni\Code\Slim\DecoratingCallableResolver;
@@ -92,7 +93,7 @@ class AppKernel
         $container[PasteController::class] = function (Container $container) {
             $pasteRepository = new DbalPasteRepository($container['dbal'], new DbalPasteMapper());
 
-            return new PasteController($pasteRepository);
+            return new PasteController($pasteRepository, new AES256Crypter());
         };
 
         $this->setupRoutes();

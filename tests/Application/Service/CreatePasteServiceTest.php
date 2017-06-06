@@ -2,9 +2,8 @@
 
 namespace Nastoletni\Code\Application\Service;
 
-use Nastoletni\Code\Application\Service\CreatePasteService;
+use Nastoletni\Code\Application\Crypter\PasteCrypter;
 use Nastoletni\Code\Domain\Paste;
-use Nastoletni\Code\Domain\Paste\NotExistsException;
 use Nastoletni\Code\Domain\PasteRepository;
 use PHPUnit\Framework\TestCase;
 
@@ -17,7 +16,25 @@ class CreatePasteServiceTest extends TestCase
             ->expects($this->once())
             ->method('save');
 
-        $createPasteService = new CreatePasteService($pasteRepositoryMock);
+        $createPasteService = new CreatePasteService(
+            $pasteRepositoryMock,
+            $this->createMock(PasteCrypter::class)
+        );
+
+        $createPasteService->handle($this->constructorParameters());
+    }
+
+    public function testHandlingEncryptsPaste()
+    {
+        $pasteCrypterMock = $this->createMock(PasteCrypter::class);
+        $pasteCrypterMock
+            ->expects($this->once())
+            ->method('encrypt');
+
+        $createPasteService = new CreatePasteService(
+            $this->createMock(PasteRepository::class),
+            $pasteCrypterMock
+        );
 
         $createPasteService->handle($this->constructorParameters());
     }
@@ -42,7 +59,10 @@ class CreatePasteServiceTest extends TestCase
             }
         };
 
-        $createPasteService = new CreatePasteService($pasteRepository);
+        $createPasteService = new CreatePasteService(
+            $pasteRepository,
+            $this->createMock(PasteCrypter::class)
+        );
         $createPasteService->handle($this->constructorParameters());
         $createPasteService->handle($this->constructorParameters());
 
@@ -52,15 +72,21 @@ class CreatePasteServiceTest extends TestCase
 
     public function testResultMatchesInput()
     {
-        $createPasteService = new CreatePasteService($this->createMock(PasteRepository::class));
+        $createPasteService = new CreatePasteService(
+            $this->createMock(PasteRepository::class),
+            $this->createMock(PasteCrypter::class)
+        );
 
         $params = $this->constructorParameters();
 
-        $paste = $createPasteService->handle($params);
+        $payload = $createPasteService->handle($params);
+        $paste = $payload->getPaste();
 
         $this->assertEquals($params['title'], $paste->getTitle());
         $this->assertEquals($params['name'][0], $paste->getFiles()[0]->getFilename());
         $this->assertEquals($params['content'][0], $paste->getFiles()[0]->getContent());
+
+        $this->assertNotEmpty($payload->getEncryptionKey());
     }
 
     private function constructorParameters()

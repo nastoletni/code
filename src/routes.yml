@@ -10,5 +10,5 @@ create:
 
 paste:
   method: GET
-  path: /{id}
+  path: /{id}/{key}
   controller: 'Nastoletni\Code\UserInterface\Web\Controller\PasteController:paste'

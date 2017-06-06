@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Nastoletni\Code\UserInterface\Web\Controller;
 
 use Nastoletni\Code\Application\Form\CreatePasteValidator;
+use Nastoletni\Code\Application\Crypter\PasteCrypter;
 use Nastoletni\Code\Application\Service\CreatePasteService;
 use Nastoletni\Code\Domain\Paste\Id;
 use Nastoletni\Code\Domain\Paste\NotExistsException;
@@ -20,13 +21,20 @@ class PasteController extends AbstractController
     private $pasteRepository;
 
     /**
+     * @var PasteCrypter
+     */
+    private $pasteCrypter;
+
+    /**
      * PasteController constructor.
      *
      * @param PasteRepository $pasteRepository
+     * @param PasteCrypter $pasteCrypter
      */
-    public function __construct(PasteRepository $pasteRepository)
+    public function __construct(PasteRepository $pasteRepository, PasteCrypter $pasteCrypter)
     {
         $this->pasteRepository = $pasteRepository;
+        $this->pasteCrypter = $pasteCrypter;
     }
 
     /**
@@ -56,32 +64,35 @@ class PasteController extends AbstractController
         $errors = $validator->validate($data);
 
         if (count($errors) > 1) {
+            // FIXME: debug echo
             $response->getBody()->write('shit '.(string)$errors);
 
             return $response;
         }
 
-        $createPasteService = new CreatePasteService($this->pasteRepository);
-        $paste = $createPasteService->handle($data);
+        $createPasteService = new CreatePasteService($this->pasteRepository, $this->pasteCrypter);
+        $payload = $createPasteService->handle($data);
 
-        $response->getBody()->write('ok :3. id: '.$paste->getId()->getBase62Id());
+        $paste = $payload->getPaste();
 
         return $response
             ->withStatus(302)
             ->withHeader('Location', $this->router->relativePathFor('paste', [
-                'id' => $paste->getId()->getBase62Id()
+                'id' => $paste->getId()->getBase62Id(),
+                'key' => $payload->getEncryptionKey()
             ]));
     }
 
     /**
-     * paste: GET /{id}
+     * paste: GET /{id}/{key}
      *
      * @param Request $request
      * @param Response $response
      * @param string $id
+     * @param string $key
      * @return Response
      */
-    public function paste(Request $request, Response $response, string $id): Response
+    public function paste(Request $request, Response $response, string $id, string $key): Response
     {
         try {
             $paste = $this->pasteRepository->getById(Id::createFromBase62($id));
@@ -89,6 +100,8 @@ class PasteController extends AbstractController
             $response->getBody()->write('404');
             return $response->withStatus(404);
         }
+
+        $this->pasteCrypter->decrypt($paste, $key);
 
         return $this->twig->render($response, 'paste.twig', [
             'paste' => $paste
