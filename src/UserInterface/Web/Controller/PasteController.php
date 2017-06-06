@@ -3,11 +3,8 @@ declare(strict_types=1);
 
 namespace Nastoletni\Code\UserInterface\Web\Controller;
 
-use DateTime;
 use Nastoletni\Code\Application\Form\CreatePasteValidator;
 use Nastoletni\Code\Application\Service\CreatePasteService;
-use Nastoletni\Code\Domain\File;
-use Nastoletni\Code\Domain\Paste;
 use Nastoletni\Code\Domain\Paste\Id;
 use Nastoletni\Code\Domain\Paste\NotExistsException;
 use Nastoletni\Code\Domain\PasteRepository;
