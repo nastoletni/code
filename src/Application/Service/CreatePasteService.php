@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Nastoletni\Code\Application\Service;
 
-use Nastoletni\Code\Application\RandomIdGenerator;
+use Nastoletni\Code\Application\Generator\RandomIdGenerator;
 use Nastoletni\Code\Domain\File;
 use Nastoletni\Code\Domain\Paste;
 use Nastoletni\Code\Domain\PasteRepository;

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Nastoletni\Code\Application;
+namespace Nastoletni\Code\Application\Generator;
 
 use Nastoletni\Code\Domain\Paste;
 

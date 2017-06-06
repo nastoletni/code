@@ -1,8 +1,7 @@
 <?php
 
-namespace Nastoletni\Code\Application;
+namespace Nastoletni\Code\Application\Generator;
 
-use Nastoletni\Code\Application\RandomIdGenerator;
 use PHPUnit\Framework\TestCase;
 
 class RandomIdGeneratorTest extends TestCase
