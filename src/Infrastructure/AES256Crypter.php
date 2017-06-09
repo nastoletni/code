@@ -58,7 +58,11 @@ class AES256Crypter implements PasteCrypter
                 $iv
             );
 
-            if ($content === false || substr($content, 0, 5) != 'valid') {
+            if (false === $content) {
+                throw new CrypterException('OpenSSL error: ' . openssl_error_string());
+            }
+
+            if ('valid' != substr($content, 0, 5)) {
                 // Throws because provided key is invalid, but in fact it can happen due
                 // to wrongly saved data, e.g. data put by hand into database.
                 throw new CrypterException();
