@@ -6,6 +6,7 @@ use Nastoletni\Code\UserInterface\Controller\AbstractController;
 use PHPUnit\Framework\TestCase;
 use Slim\Interfaces\RouterInterface;
 use Slim\Views\Twig;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class AbstractControllerTest extends TestCase
 {
@@ -21,14 +22,21 @@ class AbstractControllerTest extends TestCase
             {
                 return $this->router;
             }
+
+            public function getSession()
+            {
+                return $this->session;
+            }
         };
 
         $twig = $this->createMock(Twig::class);
         $router = $this->createMock(RouterInterface::class);
+        $session = $this->createMock(Session::class);
 
-        $controller->pseudoConstructor($twig, $router);
+        $controller->pseudoConstructor($twig, $router, $session);
 
         $this->assertEquals($twig, $controller->getTwig());
         $this->assertEquals($router, $controller->getRouter());
+        $this->assertEquals($session, $controller->getSession());
     }
 }
