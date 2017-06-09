@@ -5,7 +5,7 @@ namespace Nastoletni\Code\UserInterface\Controller;
 
 use Slim\Interfaces\RouterInterface;
 use Slim\Views\Twig;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 abstract class AbstractController
 {
@@ -20,7 +20,7 @@ abstract class AbstractController
     protected $router;
 
     /**
-     * @var SessionInterface
+     * @var Session
      */
     protected $session;
 
@@ -29,9 +29,9 @@ abstract class AbstractController
      *
      * @param Twig $twig
      * @param RouterInterface $router
-     * @param SessionInterface $session
+     * @param Session $session
      */
-    public function pseudoConstructor(Twig $twig, RouterInterface $router, SessionInterface $session): void
+    public function pseudoConstructor(Twig $twig, RouterInterface $router, Session $session): void
     {
         $this->twig = $twig;
         $this->router = $router;

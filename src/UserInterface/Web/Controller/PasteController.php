@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Nastoletni\Code\UserInterface\Web\Controller;
 
-use Nastoletni\Code\Application\Form\CreatePasteValidator;
+use Nastoletni\Code\Application\Form\CreatePasteFormValidator;
 use Nastoletni\Code\Application\Crypter\PasteCrypter;
 use Nastoletni\Code\Application\Service\CreatePasteService;
 use Nastoletni\Code\Domain\Paste\Id;
@@ -46,7 +46,9 @@ class PasteController extends AbstractController
      */
     public function home(Request $request, Response $response): Response
     {
-        return $this->twig->render($response, 'home.twig');
+        return $this->twig->render($response, 'home.twig', [
+            'errors' => $this->session->getFlashBag()->get('errors')[0]
+        ]);
     }
 
     /**
@@ -60,14 +62,15 @@ class PasteController extends AbstractController
     {
         $data = $request->getParsedBody();
 
-        $validator = CreatePasteValidator::create();
+        $validator = CreatePasteFormValidator::create();
         $errors = $validator->validate($data);
 
-        if (count($errors) > 1) {
-            // FIXME: debug echo
-            $response->getBody()->write('shit '.(string)$errors);
+        if (count($errors) > 0) {
+            $this->session->getFlashBag()->add('errors', $errors);
 
-            return $response;
+            return $response
+                ->withStatus(302)
+                ->withHeader('Location', $this->router->relativePathFor('home'));
         }
 
         $createPasteService = new CreatePasteService($this->pasteRepository, $this->pasteCrypter);

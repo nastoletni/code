@@ -5,7 +5,7 @@ namespace Nastoletni\Code\UserInterface\Controller;
 
 use Slim\Interfaces\RouterInterface;
 use Slim\Views\Twig;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class ControllerDecorator
 {
@@ -20,7 +20,7 @@ class ControllerDecorator
     private $router;
 
     /**
-     * @var SessionInterface
+     * @var Session
      */
     private $session;
 
@@ -29,9 +29,9 @@ class ControllerDecorator
      *
      * @param Twig $twig
      * @param RouterInterface $router
-     * @param SessionInterface $session
+     * @param Session $session
      */
-    public function __construct(Twig $twig, RouterInterface $router, SessionInterface $session)
+    public function __construct(Twig $twig, RouterInterface $router, Session $session)
     {
         $this->twig = $twig;
         $this->router = $router;

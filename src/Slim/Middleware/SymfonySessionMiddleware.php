@@ -5,21 +5,21 @@ namespace Nastoletni\Code\Slim\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class SymfonySessionMiddleware
 {
     /**
-     * @var SessionInterface
+     * @var Session
      */
     private $session;
 
     /**
      * SymfonySessionMiddleware constructor.
      *
-     * @param SessionInterface $session
+     * @param Session $session
      */
-    public function __construct(SessionInterface $session)
+    public function __construct(Session $session)
     {
         $this->session = $session;
     }
