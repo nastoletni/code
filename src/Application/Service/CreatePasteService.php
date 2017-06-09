@@ -43,7 +43,7 @@ class CreatePasteService
     public function handle(array $data): CreatePastePayload
     {
 //        $encryptionKey = hash('sha256', random_bytes(256 / 8));
-        $encryptionKey = openssl_random_pseudo_bytes( 256 / 8);
+        $encryptionKey = openssl_random_pseudo_bytes(256 / 8);
 
         do {
             $paste = new Paste(
@@ -66,7 +66,7 @@ class CreatePasteService
             } catch (Paste\AlreadyExistsException $e) {
                 $alreadyUsed = true;
             }
-        } while($alreadyUsed);
+        } while ($alreadyUsed);
 
         return new CreatePastePayload($paste, $encryptionKey);
     }
