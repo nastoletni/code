@@ -2,6 +2,8 @@
     "name": "nastoletni/code",
     "type": "project",
     "require": {
+        "php": ">=7.1",
+        "ext-openssl": "*",
         "slim/slim": "^3.8",
         "slim/twig-view": "^2.2",
         "doctrine/dbal": "^2.5",
