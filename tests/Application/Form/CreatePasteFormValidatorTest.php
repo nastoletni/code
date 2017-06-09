@@ -2,14 +2,14 @@
 
 namespace Nastoletni\Code\Application\Form;
 
-use Nastoletni\Code\Application\Form\CreatePasteValidator;
+use Nastoletni\Code\Application\Form\CreatePasteFormValidator;
 use PHPUnit\Framework\TestCase;
 
-class CreatePasteValidatorTest extends TestCase
+class CreatePasteFormValidatorTest extends TestCase
 {
     public function testFabricMethod()
     {
-        $this->assertInstanceOf(CreatePasteValidator::class, CreatePasteValidator::create());
+        $this->assertInstanceOf(CreatePasteFormValidator::class, CreatePasteFormValidator::create());
     }
 
     /**
@@ -17,11 +17,9 @@ class CreatePasteValidatorTest extends TestCase
      */
     public function testValidation($data, $errorsCount)
     {
-//        $this->markTestIncomplete('TODO: Make validation work!');
+        $validator = CreatePasteFormValidator::create();
 
-        $validator = CreatePasteValidator::create();
-
-        /** Just because of my laziness @see CreatePasteValidator::validateContents */
+        /** Just because of my laziness @see CreatePasteFormValidator::validateContents */
         try {
             $errors = $validator->validate($data);
         } catch (\Exception $e) {

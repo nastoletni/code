@@ -5,16 +5,12 @@ namespace Nastoletni\Code\Application\Form;
 
 use Exception;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-/**
- * @todo: make this works
- */
-class CreatePasteValidator
+class CreatePasteFormValidator
 {
     /**
      * @var ValidatorInterface
@@ -32,9 +28,9 @@ class CreatePasteValidator
     /**
      * Self fabric method just for convenience.
      *
-     * @return CreatePasteValidator
+     * @return CreatePasteFormValidator
      */
-    public static function create(): CreatePasteValidator
+    public static function create(): CreatePasteFormValidator
     {
         return new static();
     }
