@@ -11,6 +11,7 @@ use Nastoletni\Code\Infrastructure\AES256Crypter;
 use Nastoletni\Code\Infrastructure\Dbal\DbalPasteMapper;
 use Nastoletni\Code\Infrastructure\Dbal\DbalPasteRepository;
 use Nastoletni\Code\Slim\DecoratingCallableResolver;
+use Nastoletni\Code\Slim\Middleware\SymfonySessionMiddleware;
 use Nastoletni\Code\UserInterface\Controller\ControllerDecorator;
 use Nastoletni\Code\UserInterface\Web\Controller\PasteController;
 use Slim\App;
@@ -20,6 +21,7 @@ use Slim\Handlers\PhpError;
 use Slim\Handlers\Strategies\RequestResponseArgs;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Yaml\Yaml;
 
 class AppKernel
@@ -68,16 +70,19 @@ class AppKernel
 
             return $twig;
         };
+        $container['session'] = function () {
+            return new Session();
+        };
         $container['callableResolver'] = function (Container $container) {
             return new DecoratingCallableResolver(
                 $container,
                 new ControllerDecorator(
                     $container['twig'],
-                    $container['router']
+                    $container['router'],
+                    $container['session']
                 )
             );
         };
-
         $container['dbal'] = function (Container $container) {
             $config = new Configuration();
 
@@ -90,11 +95,14 @@ class AppKernel
                 'charset' => $container['config']['database']['charset'],
             ], $config);
         };
+
         $container[PasteController::class] = function (Container $container) {
             $pasteRepository = new DbalPasteRepository($container['dbal'], new DbalPasteMapper());
 
             return new PasteController($pasteRepository, new AES256Crypter());
         };
+
+        $this->slim->add(new SymfonySessionMiddleware($this->slim->getContainer()['session']));
 
         $this->setupRoutes();
     }
