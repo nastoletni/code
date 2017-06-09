@@ -8,12 +8,12 @@ use Nastoletni\Code\Domain\Paste;
 interface PasteCrypter
 {
     /**
-     * Encrypts some paste's private fields.
+     * Encrypts some Paste's private fields.
      *
      * @param Paste $paste
      * @param string $key
      */
-    public function encrypt(Paste &$paste, string &$key): void;
+    public function encrypt(Paste &$paste, string $key): void;
 
     /**
      * Decrypts encrypted fields.

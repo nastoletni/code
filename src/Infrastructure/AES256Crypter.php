@@ -14,10 +14,8 @@ class AES256Crypter implements PasteCrypter
     /**
      * {@inheritdoc}
      */
-    public function encrypt(Paste &$paste, string &$key): void
+    public function encrypt(Paste &$paste, string $key): void
     {
-        $key = urlencode($key);
-
         foreach ($paste->getFiles() as $file) {
             // Generate initialization vector.
             $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(static::CIPHER));
@@ -44,8 +42,6 @@ class AES256Crypter implements PasteCrypter
      */
     public function decrypt(Paste &$paste, string $key): void
     {
-        $key = urldecode($key);
-
         foreach ($paste->getFiles() as $file) {
             // Retrieve initialization vector from the encrypted content.
             [$content, $iv] = explode(':', $file->getContent());

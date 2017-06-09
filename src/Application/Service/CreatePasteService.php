@@ -42,8 +42,8 @@ class CreatePasteService
      */
     public function handle(array $data): CreatePastePayload
     {
-//        $encryptionKey = hash('sha256', random_bytes(256 / 8));
-        $encryptionKey = openssl_random_pseudo_bytes(256 / 8);
+        $encryptionKey = hash('sha256', random_bytes(256 / 8));
+//        $encryptionKey = openssl_random_pseudo_bytes(256 / 8);
 
         do {
             $paste = new Paste(
