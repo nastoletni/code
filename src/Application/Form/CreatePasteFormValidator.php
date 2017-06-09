@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Nastoletni\Code\Application\Form;
 
-use Exception;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -58,12 +58,12 @@ class CreatePasteFormValidator
 
         if (!isset($data['name'])) {
             // FIXME: This and below is here only because I'm too lazy to create custom constraint violation.
-            throw new Exception();
+            throw new ValidatorException();
         }
 
         foreach ($data['content'] as $i => $content) {
             if (!isset($data['name'][$i])) {
-                throw new Exception(sprintf('No name with offset of %s has been sent.', $i));
+                throw new ValidatorException(sprintf('No name with offset of %s has been sent.', $i));
             }
 
             $constraintViolationList->addAll(
@@ -86,11 +86,11 @@ class CreatePasteFormValidator
 
         if (!isset($data['content'])) {
             // FIXME: This is here only because I'm too lazy to create custom constraint violation.
-            throw new Exception();
+            throw new ValidatorException();
         }
 
         if (empty($data['content'])) {
-            throw new Exception('Content must not be empty.');
+            throw new ValidatorException('Content must not be empty.');
         }
 
         foreach ($data['content'] as $content) {

@@ -4,6 +4,7 @@ namespace Nastoletni\Code\Application\Form;
 
 use Nastoletni\Code\Application\Form\CreatePasteFormValidator;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Validator\Exception\ValidatorException;
 
 class CreatePasteFormValidatorTest extends TestCase
 {
@@ -22,7 +23,7 @@ class CreatePasteFormValidatorTest extends TestCase
         /** Just because of my laziness @see CreatePasteFormValidator::validateContents */
         try {
             $errors = $validator->validate($data);
-        } catch (\Exception $e) {
+        } catch (ValidatorException $e) {
             $this->assertTrue(true);
 
             return;
