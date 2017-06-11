@@ -42,7 +42,8 @@ class CreatePasteService
      */
     public function handle(array $data): CreatePastePayload
     {
-        $encryptionKey = mb_substr(hash('sha256', random_bytes(256 / 8)), 32);
+        // Generate pretty for eye key that will be lately used for encrypting.
+        $key = dechex(random_int(0x10000000, 0xFFFFFFFF));
 
         do {
             $paste = new Paste(
@@ -57,7 +58,7 @@ class CreatePasteService
                 $paste->addFile(new File($name, $content));
             }
 
-            $this->pasteCrypter->encrypt($paste, $encryptionKey);
+            $this->pasteCrypter->encrypt($paste, $key);
 
             $alreadyUsed = false;
             try {
@@ -67,6 +68,6 @@ class CreatePasteService
             }
         } while ($alreadyUsed);
 
-        return new CreatePastePayload($paste, $encryptionKey);
+        return new CreatePastePayload($paste, $key);
     }
 }
