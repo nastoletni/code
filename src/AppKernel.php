@@ -12,6 +12,7 @@ use Nastoletni\Code\Infrastructure\Dbal\DbalPasteMapper;
 use Nastoletni\Code\Infrastructure\Dbal\DbalPasteRepository;
 use Nastoletni\Code\Slim\DecoratingCallableResolver;
 use Nastoletni\Code\Slim\Middleware\SymfonySessionMiddleware;
+use Nastoletni\Code\Twig\SymfonyValidatorExtension;
 use Nastoletni\Code\UserInterface\Controller\ControllerDecorator;
 use Nastoletni\Code\UserInterface\Web\Controller\PasteController;
 use Slim\App;
@@ -67,6 +68,7 @@ class AppKernel
                 'debug' => $container['config']['debug']
             ]);
             $twig->addExtension(new TwigExtension($container['router'], $container['config']['base_url']));
+            $twig->addExtension(new SymfonyValidatorExtension());
 
             return $twig;
         };
