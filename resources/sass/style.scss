@@ -3,3 +3,10 @@
 pre code {
   border-radius: 0;
 }
+
+.code-form--error {
+  margin: -10px 0 15px;
+  padding: 10px 15px;
+  background: #c0392b;
+  color: #fff;
+}
