@@ -9,31 +9,28 @@ use Nastoletni\Code\Domain\Paste;
 
 class AES256Crypter implements PasteCrypter
 {
-    private const CIPHER = 'AES-256-CBC';
+    private const CIPHER = 'aes-256-cbc';
 
     /**
      * {@inheritdoc}
      */
     public function encrypt(Paste &$paste, string $key): void
     {
+        $key = $this->keyToEncryptionKey($key);
+
         foreach ($paste->getFiles() as $file) {
-            // Generate initialization vector.
             $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(static::CIPHER));
 
-            $encryptedContent = openssl_encrypt(
-                'valid' . $file->getContent(),
+            $encrypted = openssl_encrypt(
+                $file->getContent(),
                 static::CIPHER,
                 $key,
-                OPENSSL_RAW_DATA,
+                0,
                 $iv
             );
+            $iv = base64_encode($iv);
 
-            if (false === $encryptedContent) {
-                throw new CrypterException('OpenSSL error: ' . openssl_error_string());
-            }
-
-            // Append initialization vector so we would be able to decrypt it later.
-            $file->setContent($encryptedContent . ':' . $iv);
+            $file->setContent($encrypted . ':' . $iv);
         }
     }
 
@@ -42,29 +39,26 @@ class AES256Crypter implements PasteCrypter
      */
     public function decrypt(Paste &$paste, string $key): void
     {
-        foreach ($paste->getFiles() as $file) {
-            // Retrieve initialization vector from the encrypted content.
-            [$content, $iv] = explode(':', $file->getContent());
+        $key = $this->keyToEncryptionKey($key);
 
-            $content = openssl_decrypt(
-                $content,
+        foreach ($paste->getFiles() as $file) {
+            [$encrypted, $iv] = explode(':', $file->getContent());
+
+            $iv = base64_decode($iv);
+            $decrypted = openssl_decrypt(
+                $encrypted,
                 static::CIPHER,
                 $key,
-                OPENSSL_RAW_DATA,
+                0,
                 $iv
             );
 
-            if (false === $content) {
-                throw new CrypterException('OpenSSL error: ' . openssl_error_string());
-            }
-
-            if ('valid' != substr($content, 0, 5)) {
-                // Throws because provided key is invalid, but in fact it can happen due
-                // to wrongly saved data, e.g. data put by hand into database.
-                throw new CrypterException();
-            }
-
-            $file->setContent(preg_replace('/^valid/', '', $content));
+            $file->setContent($decrypted);
         }
+    }
+
+    private function keyToEncryptionKey(string $key): string
+    {
+        return mb_substr(sha1($key, true), 0, 32);
     }
 }
