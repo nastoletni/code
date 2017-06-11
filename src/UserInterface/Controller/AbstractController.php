@@ -38,12 +38,12 @@ abstract class AbstractController
         $this->session = $session;
     }
 
-    protected function flash(string $name, mixed $value): void
+    protected function flash(string $name, $value): void
     {
         $this->session->getFlashBag()->add($name, $value);
     }
 
-    protected function getFlash(string $name): ?mixed
+    protected function getFlash(string $name)
     {
         return $this->session->getFlashBag()->get($name)[0];
     }
