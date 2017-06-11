@@ -14,8 +14,7 @@ class AES256CrypterTest extends TestCase
     public function testCrypter($content)
     {
         $crypter = new AES256Crypter();
-        $key = mb_substr(hash('sha256', random_bytes(256 / 8)), 32);
-//        $key = 'test123';
+        $key = 'test123';
 
         $paste = new Paste(
             $this->createMock(Paste\Id::class),
