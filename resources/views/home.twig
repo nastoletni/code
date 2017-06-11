@@ -5,17 +5,32 @@
         <section class="panel panel-content">
             <h2 class="panel-title">Dodaj nowy</h2>
             <form action="{{ path_for('create') }}" method="post" class="code-form">
-                {% for error in errors %}
+                <label for="title" class="code-form--label">Tytuł wklejki</label>
+                <input type="text" id="title" name="title" class="code-form--control code-form--control__title" value="{{ old.title }}" placeholder="Na przykład: Zadanie #7 na SPOJu" required>
+                {% for error in error('[title]', errors) %}
                     <p>{{ error }}</p>
                 {% endfor %}
-                <label for="title" class="code-form--label">Tytuł wklejki</label>
-                <input type="text" id="title" name="title" class="code-form--control code-form--control__title" placeholder="Na przykład: Zadanie #7 na SPOJu" required>
-                <fieldset class="code-form--file" data-index="0">
-                    <label for="name[0]" class="code-form--label">Nazwa pliku (opcjonalna)</label>
-                    <input type="text" id="name[0]" name="name[0]" class="code-form--control" placeholder="Na przykład: main.cpp">
-                    <label for="content[0]" class="code-form--label">Treść pliku</label>
-                    <textarea name="content[0]" id="content[0]" rows="10" class="code-form--control code-form--control__textarea" required></textarea>
-                </fieldset>
+                {% for i, input in old.content %}
+                    <fieldset class="code-form--file" data-index="{{ i }}">
+                        <label for="name[{{ i }}]" class="code-form--label">Nazwa pliku (opcjonalna)</label>
+                        <input type="text" id="name[{{ i }}]" name="name[{{ i }}]" class="code-form--control" value="{{ attribute(old.name, i) }}" {% if i == 0 %}placeholder="Na przykład: main.cpp"{% endif %}>
+                        {% for error in error('[name][' ~ i ~ ']', errors) %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                        <label for="content[{{ i }}]" class="code-form--label">Treść pliku</label>
+                        <textarea id="content[{{ i }}]" name="content[{{ loop.index0 }}]" rows="10" class="code-form--control code-form--control__textarea" required>{{ attribute(old.content, i) }}</textarea>
+                        {% for error in error('[content][' ~ i ~ ']', errors) %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </fieldset>
+                {% else %}
+                    <fieldset class="code-form--file" data-index="0">
+                        <label for="name[0]" class="code-form--label">Nazwa pliku (opcjonalna)</label>
+                        <input type="text" id="name[0]" name="name[0]" class="code-form--control" placeholder="Na przykład: main.cpp">
+                        <label for="content[0]" class="code-form--label">Treść pliku</label>
+                        <textarea id="content[0]" name="content[0]" rows="10" class="code-form--control code-form--control__textarea" required></textarea>
+                    </fieldset>
+                {% endfor %}
                 <div class="code-form--button-group">
                     <button type="button" id="new-file" class="code-form--button">Dodaj kolejny plik</button>
                     <input type="submit" value="Dodaj wklejkę" class="code-form--button code-form--button__submit">
