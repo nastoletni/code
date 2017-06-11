@@ -57,6 +57,12 @@ class AES256Crypter implements PasteCrypter
         }
     }
 
+    /**
+     * Translates key that varies in length to 256bit (32 bytes) encryption key.
+     *
+     * @param string $key
+     * @return string
+     */
     private function keyToEncryptionKey(string $key): string
     {
         return mb_substr(sha1($key, true), 0, 32);
