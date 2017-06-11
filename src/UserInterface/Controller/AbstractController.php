@@ -37,4 +37,14 @@ abstract class AbstractController
         $this->router = $router;
         $this->session = $session;
     }
+
+    protected function flash(string $name, mixed $value): void
+    {
+        $this->session->getFlashBag()->add($name, $value);
+    }
+
+    protected function getFlash(string $name): ?mixed
+    {
+        return $this->session->getFlashBag()->get($name)[0];
+    }
 }

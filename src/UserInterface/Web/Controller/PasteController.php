@@ -47,7 +47,8 @@ class PasteController extends AbstractController
     public function home(Request $request, Response $response): Response
     {
         return $this->twig->render($response, 'home.twig', [
-            'errors' => $this->session->getFlashBag()->get('errors')[0]
+            'errors' => $this->getFlash('errors'),
+            'old' => $this->getFlash('old')
         ]);
     }
 
@@ -67,7 +68,8 @@ class PasteController extends AbstractController
         $errors = $validator->validate($data);
 
         if (count($errors) > 0) {
-            $this->session->getFlashBag()->add('errors', $errors);
+            $this->flash('errors', $errors);
+            $this->flash('old', $data);
 
             return $response
                 ->withStatus(302)
