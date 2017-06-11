@@ -30,6 +30,10 @@ class AES256Crypter implements PasteCrypter
             );
             $iv = base64_encode($iv);
 
+            if (false === $encrypted) {
+                throw new CrypterException('[OpenSSL] ' . openssl_error_string());
+            }
+
             $file->setContent($encrypted . ':' . $iv);
         }
     }
@@ -52,6 +56,10 @@ class AES256Crypter implements PasteCrypter
                 0,
                 $iv
             );
+
+            if (false === $decrypted) {
+                throw new CrypterException('[OpenSSL] ' . openssl_error_string());
+            }
 
             $file->setContent($decrypted);
         }
