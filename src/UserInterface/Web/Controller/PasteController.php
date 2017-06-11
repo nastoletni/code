@@ -12,7 +12,6 @@ use Nastoletni\Code\Domain\PasteRepository;
 use Nastoletni\Code\UserInterface\Controller\AbstractController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Symfony\Component\Validator\Exception\ValidatorException;
 
 class PasteController extends AbstractController
 {
@@ -65,12 +64,7 @@ class PasteController extends AbstractController
 
         $validator = CreatePasteFormValidator::create();
 
-        // FIXME: This try-catch block is **TEMPORARY** solution
-        try {
-            $errors = $validator->validate($data);
-        } catch (ValidatorException $e) {
-            $errors = 1;
-        }
+        $errors = $validator->validate($data);
 
         if (count($errors) > 0) {
             $this->session->getFlashBag()->add('errors', $errors);

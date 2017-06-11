@@ -21,7 +21,7 @@ class AES256Crypter implements PasteCrypter
             $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(static::CIPHER));
 
             $encryptedContent = openssl_encrypt(
-                'valid'.$file->getContent(),
+                'valid' . $file->getContent(),
                 static::CIPHER,
                 $key,
                 OPENSSL_RAW_DATA,
