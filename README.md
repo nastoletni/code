@@ -1,4 +1,4 @@
-*Here will be placed build, coverage and Packagist badges.*
+[![StyleCI][styleci-image]][styleci-link]
 
 # nastoletni/code
 
@@ -14,3 +14,6 @@ This is created with developers in mind. If you have any idea that you would lik
 3. Populate database with schema from *schema.sql*
 
 That's it.
+
+[styleci-image]: https://styleci.io/repos/92681743/shield?branch=master
+[styleci-link]: https://styleci.io/repos/92681743
