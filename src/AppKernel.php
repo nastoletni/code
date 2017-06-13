@@ -14,6 +14,7 @@ use Nastoletni\Code\Slim\DecoratingCallableResolver;
 use Nastoletni\Code\Slim\Middleware\SymfonySessionMiddleware;
 use Nastoletni\Code\Twig\SymfonyValidatorExtension;
 use Nastoletni\Code\UserInterface\Controller\ControllerDecorator;
+use Nastoletni\Code\UserInterface\Web\Controller\ErrorController;
 use Nastoletni\Code\UserInterface\Web\Controller\PasteController;
 use Slim\App;
 use Slim\Container;
@@ -51,16 +52,27 @@ class AppKernel
         $container['foundHandler'] = function () {
             return new RequestResponseArgs();
         };
+        $container['notFoundHandler'] = function (Container $container) {
+            return [$container[ErrorController::class], 'notFound'];
+        };
         $container['errorHandler'] = function (Container $container) {
+            $next = $container['config']['debug'] ?
+                new Error($container['config']['debug']) :
+                [$container[ErrorController::class], 'error'];
+
             return new Slim\Handler\LoggingErrorHandler(
                 $container->get('logger'),
-                new Error($container['config']['debug'])
+                $next
             );
         };
         $container['phpErrorHandler'] = function (Container $container) {
+            $next = $container['config']['debug'] ?
+                new PhpError($container['config']['debug']) :
+                [$container[ErrorController::class], 'error'];
+
             return new Slim\Handler\LoggingErrorHandler(
                 $container->get('logger'),
-                new PhpError($container['config']['debug'])
+                $next
             );
         };
         $container['twig'] = function (Container $container) {
@@ -75,14 +87,17 @@ class AppKernel
         $container['session'] = function () {
             return new Session();
         };
+        $container['controllerDecorator'] = function (Container $container) {
+            return new ControllerDecorator(
+                $container['twig'],
+                $container['router'],
+                $container['session']
+            );
+        };
         $container['callableResolver'] = function (Container $container) {
             return new DecoratingCallableResolver(
                 $container,
-                new ControllerDecorator(
-                    $container['twig'],
-                    $container['router'],
-                    $container['session']
-                )
+                $container['controllerDecorator']
             );
         };
         $container['dbal'] = function (Container $container) {
@@ -102,6 +117,15 @@ class AppKernel
             $pasteRepository = new DbalPasteRepository($container['dbal'], new DbalPasteMapper());
 
             return new PasteController($pasteRepository, new AES256Crypter());
+        };
+        $container[ErrorController::class] = function (Container $container) {
+            /** @var ControllerDecorator $controllerDecorator */
+            $controllerDecorator = $container['controllerDecorator'];
+
+            $errorController = new ErrorController();
+            $controllerDecorator->decorate($errorController);
+
+            return $errorController;
         };
 
         $this->slim->add(new SymfonySessionMiddleware($this->slim->getContainer()['session']));
