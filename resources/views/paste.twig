@@ -1,5 +1,7 @@
 {% extends 'layout.twig' %}
 
+{% block title %}Podgląd wklejki {{ paste.id.base62Id }} - {{ parent() }}{% endblock %}
+
 {% block head %}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/mono-blue.min.css">
 {% endblock %}
