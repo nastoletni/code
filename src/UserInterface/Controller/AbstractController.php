@@ -45,6 +45,10 @@ abstract class AbstractController
 
     protected function getFlash(string $name)
     {
-        return $this->session->getFlashBag()->get($name)[0];
+        if (isset($this->session->getFlashBag()->get($name)[0])) {
+            return $this->session->getFlashBag()->get($name)[0];
+        }
+
+        return null;
     }
 }
