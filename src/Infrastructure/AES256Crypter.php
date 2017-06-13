@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Infrastructure;
@@ -31,10 +32,10 @@ class AES256Crypter implements PasteCrypter
             $iv = base64_encode($iv);
 
             if (false === $encrypted) {
-                throw new CrypterException('[OpenSSL] ' . openssl_error_string());
+                throw new CrypterException('[OpenSSL] '.openssl_error_string());
             }
 
-            $file->setContent($encrypted . ':' . $iv);
+            $file->setContent($encrypted.':'.$iv);
         }
     }
 
@@ -58,7 +59,7 @@ class AES256Crypter implements PasteCrypter
             );
 
             if (false === $decrypted) {
-                throw new CrypterException('[OpenSSL] ' . openssl_error_string());
+                throw new CrypterException('[OpenSSL] '.openssl_error_string());
             }
 
             $file->setContent($decrypted);
@@ -69,6 +70,7 @@ class AES256Crypter implements PasteCrypter
      * Translates key that varies in length to 256bit (32 bytes) encryption key.
      *
      * @param string $key
+     *
      * @return string
      */
     private function keyToEncryptionKey(string $key): string

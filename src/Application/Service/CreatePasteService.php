@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Application\Service;
@@ -25,7 +26,7 @@ class CreatePasteService
      * CreatePasteService constructor.
      *
      * @param PasteRepository $pasteRepository
-     * @param PasteCrypter $pasteCrypter
+     * @param PasteCrypter    $pasteCrypter
      */
     public function __construct(PasteRepository $pasteRepository, PasteCrypter $pasteCrypter)
     {
@@ -38,6 +39,7 @@ class CreatePasteService
      * saves it to repository.
      *
      * @param array $data
+     *
      * @return CreatePastePayload
      */
     public function handle(array $data): CreatePastePayload

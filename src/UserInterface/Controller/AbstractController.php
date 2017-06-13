@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\UserInterface\Controller;
@@ -27,9 +28,9 @@ abstract class AbstractController
     /**
      * Pseudo constructor to use by decorator.
      *
-     * @param Twig $twig
+     * @param Twig            $twig
      * @param RouterInterface $router
-     * @param Session $session
+     * @param Session         $session
      */
     public function pseudoConstructor(Twig $twig, RouterInterface $router, Session $session): void
     {
@@ -48,7 +49,5 @@ abstract class AbstractController
         if (isset($this->session->getFlashBag()->get($name)[0])) {
             return $this->session->getFlashBag()->get($name)[0];
         }
-
-        return null;
     }
 }

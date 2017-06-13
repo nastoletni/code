@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code;
@@ -67,7 +68,7 @@ class AppKernel
         $container['settings']['displayErrorDetails'] = $container['config']['debug'];
         $container['logger'] = function () {
             return new Logger('application', [
-                new StreamHandler(__DIR__.'/../logs/logs.log')
+                new StreamHandler(__DIR__.'/../logs/logs.log'),
             ]);
         };
         $container['foundHandler'] = function () {
@@ -100,7 +101,7 @@ class AppKernel
         };
         $container['twig'] = function (Container $container) {
             $twig = new Twig(__DIR__.'/../resources/views/', [
-                'debug' => $container['config']['debug']
+                'debug' => $container['config']['debug'],
             ]);
             $twig->addExtension(new TwigExtension($container['router'], $container['config']['base_url']));
             $twig->addExtension(new SymfonyValidatorExtension());
@@ -127,12 +128,12 @@ class AppKernel
             $config = new Configuration();
 
             return DriverManager::getConnection([
-                'driver' => 'pdo_mysql',
-                'host' => $container['config']['database']['host'],
-                'dbname' => $container['config']['database']['name'],
-                'user' => $container['config']['database']['user'],
+                'driver'   => 'pdo_mysql',
+                'host'     => $container['config']['database']['host'],
+                'dbname'   => $container['config']['database']['name'],
+                'user'     => $container['config']['database']['user'],
                 'password' => $container['config']['database']['password'],
-                'charset' => $container['config']['database']['charset'],
+                'charset'  => $container['config']['database']['charset'],
             ], $config);
         };
 

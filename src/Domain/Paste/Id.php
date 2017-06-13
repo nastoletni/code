@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Domain\Paste;
@@ -26,6 +27,7 @@ class Id
      * Creates Id from ordinary, 10 base number [0-9].
      *
      * @param int $id
+     *
      * @return Id
      */
     public static function createFromBase10(int $id): Id
@@ -37,6 +39,7 @@ class Id
      * Creates Id from base 62 number [0-9a-zA-Z].
      *
      * @param string $id
+     *
      * @return Id
      */
     public static function createFromBase62(string $id): Id

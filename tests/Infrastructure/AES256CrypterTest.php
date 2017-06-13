@@ -79,7 +79,7 @@ Vivamus lobortis, odio vitae fringilla posuere, odio purus pharetra magna, ornar
 
 Nam urna mauris, elementum sit amet sapien eu, euismod pharetra dolor. Etiam sed sem sapien. Mauris eu scelerisque orci. Curabitur lobortis magna a ligula malesuada, eu aliquam justo euismod. Phasellus vel blandit est. Morbi pretium, nisi non condimentum gravida, orci elit mollis neque, in condimentum leo quam at nunc. Nulla aliquam pretium mauris eu condimentum. Nulla convallis sed dui sed facilisis. Morbi at metus viverra, consequat erat quis, euismod mi. Praesent in bibendum ante. In in purus tellus. Nunc est enim, volutpat sed mauris sit amet, cursus molestie urna. Donec dictum nisi id massa porttitor scelerisque sed.
 CONTENT
-]
+],
         ];
     }
 }

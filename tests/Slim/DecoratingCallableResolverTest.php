@@ -2,17 +2,12 @@
 
 namespace Nastoletni\Code\Slim;
 
-use Nastoletni\Code\Slim\DecoratingCallableResolver;
 use Nastoletni\Code\UserInterface\Controller\AbstractController;
 use Nastoletni\Code\UserInterface\Controller\ControllerDecorator;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
-use Psr\Container\NotFoundExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Interfaces\RouterInterface;
-use Slim\Views\Twig;
 
 class DecoratingCallableResolverTest extends TestCase
 {
@@ -60,7 +55,7 @@ class DecoratingCallableResolverTest extends TestCase
 
     public function testResolveWithChildOfAbstractControllerWithMethod()
     {
-        $controller = new class extends AbstractController {
+        $controller = new class() extends AbstractController {
             public function home(
                 ServerRequestInterface $request,
                 ResponseInterface $response
@@ -86,7 +81,7 @@ class DecoratingCallableResolverTest extends TestCase
 
     public function testResolveWithInvokableChildOfAbstractController()
     {
-        $controller = new class extends AbstractController {
+        $controller = new class() extends AbstractController {
             public function __invoke(
                 ServerRequestInterface $request,
                 ResponseInterface $response
@@ -111,7 +106,7 @@ class DecoratingCallableResolverTest extends TestCase
 
     public function testResolveWithNotChildOfAbstractController()
     {
-        $controller = new class {
+        $controller = new class() {
             public function home(
                 ServerRequestInterface $request,
                 ResponseInterface $response
@@ -137,10 +132,10 @@ class DecoratingCallableResolverTest extends TestCase
 
     private function getContainerWithClassMethod()
     {
-        return new class implements ContainerInterface {
+        return new class() implements ContainerInterface {
             public function get($id)
             {
-                return new class extends AbstractController {
+                return new class() extends AbstractController {
                     public function home(
                         ServerRequestInterface $request,
                         ResponseInterface $response
@@ -159,10 +154,10 @@ class DecoratingCallableResolverTest extends TestCase
 
     public function getContainerWithInvokableClass()
     {
-        return new class implements ContainerInterface {
+        return new class() implements ContainerInterface {
             public function get($id)
             {
-                return new class extends AbstractController {
+                return new class() extends AbstractController {
                     public function __invoke(
                         ServerRequestInterface $request,
                         ResponseInterface $response

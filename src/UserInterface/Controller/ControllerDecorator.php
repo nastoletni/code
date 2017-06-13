@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\UserInterface\Controller;
@@ -27,9 +28,9 @@ class ControllerDecorator
     /**
      * ControllerDecorator constructor.
      *
-     * @param Twig $twig
+     * @param Twig            $twig
      * @param RouterInterface $router
-     * @param Session $session
+     * @param Session         $session
      */
     public function __construct(Twig $twig, RouterInterface $router, Session $session)
     {

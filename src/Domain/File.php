@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Domain;
@@ -19,7 +20,7 @@ class File
      * File constructor.
      *
      * @param null|string $filename
-     * @param string $content
+     * @param string      $content
      */
     public function __construct(?string $filename, string $content)
     {

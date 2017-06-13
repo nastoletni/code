@@ -2,10 +2,7 @@
 
 namespace Nastoletni\Code\Application\Form;
 
-use InvalidArgumentException;
-use Nastoletni\Code\Application\Form\CreatePasteFormValidator;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Validator\Exception\ValidatorException;
 
 class CreatePasteFormValidatorTest extends TestCase
 {
@@ -31,83 +28,83 @@ class CreatePasteFormValidatorTest extends TestCase
         return [
             [
                 [
-                    'title' => 'Foobar'
+                    'title' => 'Foobar',
                 ],
-                2
+                2,
             ],
             [
                 [
-                    'title' => 'Foobar',
+                    'title'   => 'Foobar',
                     'content' => [
-                        'test'
-                    ]
+                        'test',
+                    ],
                 ],
-                1
+                1,
             ],
             [
                 [
                     'title' => 'Foobar',
-                    'name' => [
-                        ''
+                    'name'  => [
+                        '',
                     ],
                     'content' => [
-                        'Test content'
-                    ]
+                        'Test content',
+                    ],
                 ],
-                0
+                0,
             ],
             [
                 [
                     'title' => 'Test',
-                    'name' => [
+                    'name'  => [
                         '',
-                        ''
+                        '',
                     ],
                     'content' => [
                         'Test',
-                        'Another test'
-                    ]
+                        'Another test',
+                    ],
                 ],
-                0
+                0,
             ],
             [
                 [
                     'title' => '',
-                    'name' => [
-                        ''
+                    'name'  => [
+                        '',
                     ],
                     'content' => [
-                        'Test'
-                    ]
+                        'Test',
+                    ],
                 ],
-                1
+                1,
             ],
             [
                 [
                     'title' => '',
-                    'name' => [
-                        ''
+                    'name'  => [
+                        '',
                     ],
                     'content' => [
-                        ''
-                    ]
+                        '',
+                    ],
                 ],
-                2
+                2,
             ],
             [
                 [
                     'title' => 'Title',
-                    'name' => [
+                    'name'  => [
                         '',
-                        ''
+                        '',
                     ],
                     'content' => [
                         'Test',
-                        'Foobar'
-                    ]
+                        'Foobar',
+                    ],
                 ],
-                0
-            ]
+                0,
+            ],
         ];
     }
 }

@@ -2,10 +2,8 @@
 
 namespace Nastoletni\Code\Application;
 
-use DateTime;
 use Nastoletni\Code\Infrastructure\Dbal\DbalPasteMapper;
 use PHPUnit\Framework\TestCase;
-use Nastoletni\Code\Application\InvalidDataException;
 
 class DbalPasteMapperTest extends TestCase
 {
@@ -15,19 +13,19 @@ class DbalPasteMapperTest extends TestCase
 
         $validData = [
             [
-                'id' => 438643,
-                'title' => null,
+                'id'         => 438643,
+                'title'      => null,
                 'created_at' => '2017-05-25 20:33:54',
-                'filename' => 'foo.php',
-                'content' => '<?= "test"; ?>'
+                'filename'   => 'foo.php',
+                'content'    => '<?= "test"; ?>',
             ],
             [
-                'id' => 438643,
-                'title' => null,
+                'id'         => 438643,
+                'title'      => null,
                 'created_at' => '2017-05-25 20:33:54',
-                'filename' => '',
-                'content' => 'test'
-            ]
+                'filename'   => '',
+                'content'    => 'test',
+            ],
         ];
 
         $paste = $mapper->map($validData);
@@ -58,23 +56,23 @@ class DbalPasteMapperTest extends TestCase
             [[[
             ]]],
             [[[
-                'id' => 1
+                'id' => 1,
             ]]],
             [[[
-                'id' => 1,
-                'title' => 'test'
-            ]]],
-            [[[
-                'id' => 1,
+                'id'    => 1,
                 'title' => 'test',
-                'created_at' => ''
             ]]],
             [[[
-                'id' => 1,
-                'title' => 'test',
+                'id'         => 1,
+                'title'      => 'test',
                 'created_at' => '',
-                'filename' => 'test'
-            ]]]
+            ]]],
+            [[[
+                'id'         => 1,
+                'title'      => 'test',
+                'created_at' => '',
+                'filename'   => 'test',
+            ]]],
         ];
     }
 }

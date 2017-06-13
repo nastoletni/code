@@ -2,7 +2,6 @@
 
 namespace Nastoletni\Code\Domain\Paste;
 
-use Nastoletni\Code\Domain\Paste\Id;
 use PHPUnit\Framework\TestCase;
 
 class IdTest extends TestCase

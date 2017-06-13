@@ -2,7 +2,6 @@
 
 namespace Nastoletni\Code\Domain;
 
-use Nastoletni\Code\Domain\Paste;
 use PHPUnit\Framework\TestCase;
 
 class PasteTest extends TestCase
@@ -44,18 +43,18 @@ class PasteTest extends TestCase
             [
                 $this->createMock(Paste\Id::class),
                 'Example',
-                new \DateTime()
+                new \DateTime(),
             ],
             [
                 $this->createMock(Paste\Id::class),
                 '',
-                new \DateTime('+1 day')
+                new \DateTime('+1 day'),
             ],
             [
                 $this->createMock(Paste\Id::class),
                 null,
-                new \DateTime('-1 year')
-            ]
+                new \DateTime('-1 year'),
+            ],
         ];
     }
 

@@ -1,7 +1,7 @@
 <?php
+
 namespace Nastoletni\Code\Application;
 
-use Nastoletni\Code\Application\Base10And62Converter;
 use PHPUnit\Framework\TestCase;
 
 class Base10And62ConverterTest extends TestCase
@@ -31,7 +31,7 @@ class Base10And62ConverterTest extends TestCase
             [36, 'A'],
             [62, '10'],
             [72, '1a'],
-            [99, '1B']
+            [99, '1B'],
         ];
     }
 }

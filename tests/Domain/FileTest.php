@@ -2,7 +2,6 @@
 
 namespace Nastoletni\Code\Domain;
 
-use Nastoletni\Code\Domain\File;
 use PHPUnit\Framework\TestCase;
 
 class FileTest extends TestCase
@@ -39,7 +38,7 @@ class FileTest extends TestCase
             ['', 'test2'],
             ['test', 'test3'],
             ['test.txt', 'test4'],
-            ['.test', 'test5']
+            ['.test', 'test5'],
         ];
     }
 }

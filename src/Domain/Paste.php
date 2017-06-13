@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Domain;
@@ -30,9 +31,9 @@ class Paste
     /**
      * Paste constructor.
      *
-     * @param Paste\Id $id
+     * @param Paste\Id    $id
      * @param null|string $title
-     * @param DateTime $createdAt
+     * @param DateTime    $createdAt
      */
     public function __construct(Paste\Id $id, ?string $title, DateTime $createdAt)
     {

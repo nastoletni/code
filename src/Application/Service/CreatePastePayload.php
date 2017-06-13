@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Application\Service;
@@ -19,7 +20,8 @@ class CreatePastePayload
 
     /**
      * CreatePastePayload constructor.
-     * @param Paste $paste
+     *
+     * @param Paste  $paste
      * @param string $encryptionKey
      */
     public function __construct(Paste $paste, string $encryptionKey)

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Slim;
@@ -24,7 +25,7 @@ class DecoratingCallableResolver implements CallableResolverInterface
     /**
      * DecoratingCallableResolver constructor.
      *
-     * @param ContainerInterface $container
+     * @param ContainerInterface  $container
      * @param ControllerDecorator $controllerDecorator
      */
     public function __construct(
@@ -40,6 +41,7 @@ class DecoratingCallableResolver implements CallableResolverInterface
      * of AbstractController.
      *
      * @param mixed $toResolve
+     *
      * @return callable
      */
     public function resolve($toResolve): callable
@@ -50,7 +52,7 @@ class DecoratingCallableResolver implements CallableResolverInterface
         // value for callable array.
         if (($controller = $resolved) instanceof AbstractController
             || is_array($controller) && ($controller = $resolved[0]) instanceof AbstractController) {
-            /** @var $controller AbstractController */
+            /* @var $controller AbstractController */
             $this->controllerDecorator->decorate($controller);
         }
 

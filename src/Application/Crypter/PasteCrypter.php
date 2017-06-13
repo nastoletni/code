@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Application\Crypter;
@@ -10,7 +11,7 @@ interface PasteCrypter
     /**
      * Encrypts some Paste's private fields.
      *
-     * @param Paste $paste
+     * @param Paste  $paste
      * @param string $key
      */
     public function encrypt(Paste &$paste, string $key): void;
@@ -18,8 +19,9 @@ interface PasteCrypter
     /**
      * Decrypts encrypted fields.
      *
-     * @param Paste $paste
+     * @param Paste  $paste
      * @param string $key
+     *
      * @throws CrypterException when given key is invalid.
      */
     public function decrypt(Paste &$paste, string $key): void;

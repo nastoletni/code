@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Twig;
@@ -15,15 +16,16 @@ class SymfonyValidatorExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new Twig_SimpleFunction('error', [$this, 'error'])
+            new Twig_SimpleFunction('error', [$this, 'error']),
         ];
     }
 
     /**
      * Yields all error messages from given field.
      *
-     * @param string $field
+     * @param string                                $field
      * @param ConstraintViolationListInterface|null $errors
+     *
      * @return iterable
      */
     public function error(string $field, ?ConstraintViolationListInterface $errors): iterable

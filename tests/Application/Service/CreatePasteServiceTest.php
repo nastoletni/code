@@ -41,12 +41,11 @@ class CreatePasteServiceTest extends TestCase
 
     public function testHandlingPassesOnAlreadyExistsException()
     {
-        $pasteRepository = new class implements PasteRepository {
+        $pasteRepository = new class() implements PasteRepository {
             private $thrown = false;
 
             public function getById(Paste\Id $id): Paste
             {
-                return null;
             }
 
             public function save(Paste $paste): void
@@ -93,12 +92,12 @@ class CreatePasteServiceTest extends TestCase
     {
         return [
             'title' => 'Test',
-            'name' => [
-                'test.txt'
+            'name'  => [
+                'test.txt',
             ],
             'content' => [
-                'Lorem ipsum dolor'
-            ]
+                'Lorem ipsum dolor',
+            ],
         ];
     }
 }

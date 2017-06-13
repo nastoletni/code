@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Infrastructure\Dbal;
@@ -14,6 +15,7 @@ class DbalPasteMapper
      * Maps array to Paste entity.
      *
      * @param array $data Associative array of paste fields.
+     *
      * @return Paste
      */
     public function map(array $data): Paste
@@ -42,6 +44,7 @@ class DbalPasteMapper
      * Checks whether given data is valid.
      *
      * @param array $data
+     *
      * @throws InvalidDataException when data is invalid.
      */
     private function validateData(array $data): void

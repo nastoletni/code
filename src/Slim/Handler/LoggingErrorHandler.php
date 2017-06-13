@@ -1,12 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Slim\Handler;
 
-use Psr\Log\LoggerInterface;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use Exception;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 class LoggingErrorHandler
@@ -25,7 +25,7 @@ class LoggingErrorHandler
      * LoggingErrorHandler constructor.
      *
      * @param LoggerInterface $logger
-     * @param callable|null $nextHandler
+     * @param callable|null   $nextHandler
      */
     public function __construct(LoggerInterface $logger, ?callable $nextHandler = null)
     {
@@ -36,9 +36,10 @@ class LoggingErrorHandler
     /**
      * Logs exceptions to logger.
      *
-     * @param Request $request
-     * @param Response $response
+     * @param Request   $request
+     * @param Response  $response
      * @param Throwable $exception
+     *
      * @return Response
      */
     public function __invoke(Request $request, Response $response, Throwable $exception): Response

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Infrastructure\Dbal;
@@ -25,7 +26,7 @@ class DbalPasteRepository implements PasteRepository
     /**
      * DbalPasteRepository constructor.
      *
-     * @param Connection $dbal
+     * @param Connection      $dbal
      * @param DbalPasteMapper $mapper
      */
     public function __construct(Connection $dbal, DbalPasteMapper $mapper)
@@ -59,6 +60,7 @@ class DbalPasteRepository implements PasteRepository
 
     /**
      * {@inheritdoc}
+     *
      * @throws ConnectionException when there is something wrong with transaction.
      */
     public function save(Paste $paste): void
@@ -67,12 +69,12 @@ class DbalPasteRepository implements PasteRepository
 
         try {
             $this->dbal->insert('pastes', [
-                'id' => $paste->getId()->getBase10Id(),
-                'title' => $paste->getTitle(),
-                'created_at' => $paste->getCreatedAt()->format('Y-m-d H:i:s')
+                'id'         => $paste->getId()->getBase10Id(),
+                'title'      => $paste->getTitle(),
+                'created_at' => $paste->getCreatedAt()->format('Y-m-d H:i:s'),
             ], [PDO::PARAM_INT, PDO::PARAM_STR, PDO::PARAM_STR]);
         } catch (DBALException $e) {
-            /** @see https://dev.mysql.com/doc/refman/5.7/en/error-messages-server.html#error_er_dup_entry */
+            /* @see https://dev.mysql.com/doc/refman/5.7/en/error-messages-server.html#error_er_dup_entry */
             if (1062 == $e->getCode()) {
                 throw new Paste\AlreadyExistsException(sprintf(
                     'Paste with id %s already exists.',
@@ -88,7 +90,7 @@ class DbalPasteRepository implements PasteRepository
             $this->dbal->insert('files', [
                 'paste_id' => $paste->getId()->getBase10Id(),
                 'filename' => $file->getFilename(),
-                'content' => $file->getContent()
+                'content'  => $file->getContent(),
             ], [PDO::PARAM_INT, PDO::PARAM_STR, PDO::PARAM_STR]);
         }
 

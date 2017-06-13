@@ -16,7 +16,7 @@ class ControllerDecoratorTest extends TestCase
         $session = $this->createMock(Session::class);
         $decorator = new ControllerDecorator($twig, $router, $session);
 
-        $controller = new class extends AbstractController {
+        $controller = new class() extends AbstractController {
             public function getTwig()
             {
                 return $this->twig;

@@ -2,7 +2,6 @@
 
 namespace Nastoletni\Code\UserInterface\Controller;
 
-use Nastoletni\Code\UserInterface\Controller\AbstractController;
 use PHPUnit\Framework\TestCase;
 use Slim\Interfaces\RouterInterface;
 use Slim\Views\Twig;
@@ -12,7 +11,7 @@ class AbstractControllerTest extends TestCase
 {
     public function testPseudoConstructor()
     {
-        $controller = new class extends AbstractController {
+        $controller = new class() extends AbstractController {
             public function getTwig()
             {
                 return $this->twig;

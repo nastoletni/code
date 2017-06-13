@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\Application\Form;
@@ -28,8 +29,9 @@ class CreatePasteFormValidator
 
     /**
      * Validates given data to comply with entity requirements.
-     * 
+     *
      * @param array $data
+     *
      * @return ConstraintViolationListInterface
      */
     public function validate(array $data): ConstraintViolationListInterface
@@ -38,12 +40,12 @@ class CreatePasteFormValidator
 
         $constraint = new Assert\Collection([
             'title' => new Assert\NotBlank(),
-            'name' => new Assert\All([
-                new Assert\NotNull()
+            'name'  => new Assert\All([
+                new Assert\NotNull(),
             ]),
             'content' => new Assert\All([
-                new Assert\NotBlank()
-            ])
+                new Assert\NotBlank(),
+            ]),
         ]);
 
         return $validator->validate($data, $constraint);

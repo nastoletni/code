@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nastoletni\Code\UserInterface\Web\Controller;
@@ -11,10 +12,11 @@ use Throwable;
 class ErrorController extends AbstractController
 {
     /**
-     * Handling 404 Not found
+     * Handling 404 Not found.
      *
-     * @param Request $request
+     * @param Request  $request
      * @param Response $response
+     *
      * @return Response
      */
     public function notFound(Request $request, Response $response): Response
@@ -24,11 +26,12 @@ class ErrorController extends AbstractController
     }
 
     /**
-     * Handling 500 Internal server error
+     * Handling 500 Internal server error.
      *
-     * @param Request $request
-     * @param Response $response
+     * @param Request   $request
+     * @param Response  $response
      * @param Throwable $exception
+     *
      * @return Response
      */
     public function error(Request $request, Response $response, Throwable $exception): Response
