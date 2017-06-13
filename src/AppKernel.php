@@ -41,7 +41,28 @@ class AppKernel
         $this->slim = new App();
 
         $this->setupConfig();
+        $this->setupServices();
+        $this->setupRoutes();
 
+        // Middlewares
+        $this->slim->add(new SymfonySessionMiddleware($this->slim->getContainer()['session']));
+    }
+
+    /**
+     * Sets up config in container.
+     */
+    private function setupConfig(): void
+    {
+        $config = Yaml::parse(file_get_contents(__DIR__.'/config.yml'));
+
+        $this->slim->getContainer()['config'] = $config;
+    }
+
+    /**
+     * Sets up dependencies in container.
+     */
+    private function setupServices(): void
+    {
         $container = $this->slim->getContainer();
         $container['settings']['displayErrorDetails'] = $container['config']['debug'];
         $container['logger'] = function () {
@@ -56,6 +77,7 @@ class AppKernel
             return [$container[ErrorController::class], 'notFound'];
         };
         $container['errorHandler'] = function (Container $container) {
+            // Show pretty error page on production and Slim debug info on development.
             $next = $container['config']['debug'] ?
                 new Error($container['config']['debug']) :
                 [$container[ErrorController::class], 'error'];
@@ -66,6 +88,7 @@ class AppKernel
             );
         };
         $container['phpErrorHandler'] = function (Container $container) {
+            // Show pretty error page on production and Slim debug info on development.
             $next = $container['config']['debug'] ?
                 new PhpError($container['config']['debug']) :
                 [$container[ErrorController::class], 'error'];
@@ -113,6 +136,7 @@ class AppKernel
             ], $config);
         };
 
+        // Controllers
         $container[PasteController::class] = function (Container $container) {
             $pasteRepository = new DbalPasteRepository($container['dbal'], new DbalPasteMapper());
 
@@ -127,20 +151,6 @@ class AppKernel
 
             return $errorController;
         };
-
-        $this->slim->add(new SymfonySessionMiddleware($this->slim->getContainer()['session']));
-
-        $this->setupRoutes();
-    }
-
-    /**
-     * Sets up config in container.
-     */
-    private function setupConfig(): void
-    {
-        $config = Yaml::parse(file_get_contents(__DIR__.'/config.yml'));
-
-        $this->slim->getContainer()['config'] = $config;
     }
 
     /**
