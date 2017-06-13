@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Nastoletni\Code\UserInterface\Web\Controller;
 
+use Nastoletni\Code\Application\Crypter\CrypterException;
 use Nastoletni\Code\Application\Form\CreatePasteFormValidator;
 use Nastoletni\Code\Application\Crypter\PasteCrypter;
 use Nastoletni\Code\Application\Service\CreatePasteService;
@@ -12,6 +13,7 @@ use Nastoletni\Code\Domain\PasteRepository;
 use Nastoletni\Code\UserInterface\Controller\AbstractController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Exception\NotFoundException;
 
 class PasteController extends AbstractController
 {
@@ -97,17 +99,23 @@ class PasteController extends AbstractController
      * @param string $id
      * @param string $key
      * @return Response
+     * @throws NotFoundException
      */
     public function paste(Request $request, Response $response, string $id, string $key): Response
     {
         try {
             $paste = $this->pasteRepository->getById(Id::createFromBase62($id));
         } catch (NotExistsException $e) {
-            $response->getBody()->write('404');
-            return $response->withStatus(404);
+            throw new NotFoundException($request, $response);
         }
 
-        $this->pasteCrypter->decrypt($paste, $key);
+        try {
+            $this->pasteCrypter->decrypt($paste, $key);
+        } catch (CrypterException $e) {
+            // CrypterException is almost always when user has modified
+            // encryption key in the URL and that is considered as not found.
+            throw new NotFoundException($request, $response);
+        }
 
         return $this->twig->render($response, 'paste.twig', [
             'paste' => $paste
