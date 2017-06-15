@@ -25,6 +25,14 @@ class SymfonySessionMiddleware
         $this->session = $session;
     }
 
+    /**
+     * Starts session.
+     *
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @param callable $next
+     * @return ResponseInterface
+     */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         $this->session->start();
