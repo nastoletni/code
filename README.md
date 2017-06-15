@@ -1,5 +1,6 @@
 # nastoletni/code
 
+[![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
@@ -18,6 +19,7 @@ This is created with developers in mind. If you have any idea that you would lik
 
 That's it.
 
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/nastoletni/code/master.svg?style=flat-square
 [ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/nastoletni/code.svg?style=flat-square
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/nastoletni/code.svg?style=flat-square
