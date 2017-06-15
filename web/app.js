@@ -32,6 +32,7 @@ const NewFormButton = {
 
   getNextIndex() {
     const currentIndex = parseInt(document.querySelector(this.LAST_FORM_QUERY).getAttribute('data-index'), 10);
+
     return currentIndex + 1;
   },
 };
