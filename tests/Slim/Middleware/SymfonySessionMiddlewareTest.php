@@ -2,7 +2,6 @@
 
 namespace Nastoletni\Code\Slim\Middleware;
 
-use Nastoletni\Code\Slim\Middleware\SymfonySessionMiddleware;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
