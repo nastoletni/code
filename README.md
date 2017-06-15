@@ -6,11 +6,11 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![StyleCI][ico-styleci]][link-styleci]
 
-This is open source pastebin-like website with features like multifiles pastes and drag'n'drop. Every paste is not public. Access to this has only the one with link to it which is unique and generated from almost one trilion combinations.
+This is open source pastebin-like website with features like multifile pastes and drag'n'drop. It keeps privacy of pastes, each file is being encrypted using AES-256-CBC and the only person (*or computer*) that knows the key is you.
 
-This is created with developers in mind. If you have any idea that you would like to be implemented, create new issue and describe what you want. Any kind of feedback is welcome!
+We aim with this tool mainly for developers in mind and we want to keep it as usable and simple in use as we can. If you have any idea that could be implemented, [create a new issue](https://github.com/nastoletni/code/issues/new) and describe it. Any kind of feedback is welcome!
 
-## Installation
+## Install
 
 1. Download Composer dependencies `composer install`
 2. Install npm dependencies and compile sass `npm install && gulp`
@@ -18,6 +18,14 @@ This is created with developers in mind. If you have any idea that you would lik
 3. Populate database with schema from *schema.sql*
 
 That's it.
+
+## Security
+
+If you discover any security related issues, please email [w.albert221@gmail.com](mailto:w.albert221@gmail.com) instead of using the issue tracker.
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/nastoletni/code/master.svg?style=flat-square
