@@ -41,23 +41,5 @@
 {% endblock %}
 
 {% block js %}
-    <script>
-        const newFileButton = document.getElementById('new-file');
-
-        newFileButton.addEventListener('click', () => {
-            const lastFile = document.querySelector('.code-form--file:last-of-type');
-            const lastIndex = lastFile.getAttribute('last-index');
-
-            const newIndex = lastIndex + 1;
-            const newFile = document.createElement('fieldset');
-            newFile.classList.add('code-form--file');
-            newFile.setAttribute('data-index', newIndex);
-            newFile.innerHTML = `<label class="code-form--label" for="name[${newIndex}]">Nazwa pliku (opcjonalna)</label>
-<input type="text" id="name[${newIndex}]" name="name[${newIndex}]" class="code-form--control">
-<label for="content[${newIndex}]" class="code-form--label">Treść pliku</label>
-<textarea name="content[${newIndex}]" id="content[${newIndex}]" rows="10" class="code-form--control code-form--control__textarea"></textarea>`;
-
-            lastFile.parentNode.insertBefore(newFile, lastFile.nextSibling);
-        });
-    </script>
+    <script src='app.js'></script>
 {% endblock %}
