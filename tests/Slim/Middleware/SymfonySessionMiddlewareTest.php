@@ -22,7 +22,9 @@ class SymfonySessionMiddlewareTest extends TestCase
         $middleware(
             $this->createMock(ServerRequestInterface::class),
             $this->createMock(ResponseInterface::class),
-            function (ServerRequestInterface $request, ResponseInterface $response) { return $response; }
+            function (ServerRequestInterface $request, ResponseInterface $response) {
+                return $response;
+            }
         );
     }
 }
