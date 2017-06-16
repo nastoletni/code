@@ -10,3 +10,11 @@ pre code {
   background: #c0392b;
   color: #fff;
 }
+
+.main__centered {
+  height: calc(100vh - 199px); // 129px footer + 70px header
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
