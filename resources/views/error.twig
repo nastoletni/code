@@ -3,6 +3,8 @@
 {% block main %}
     <main class="main error-page">
         <h2 class="error-page--title">Błąd {{ error }}</h2>
-        <img src="{{ xkcdImage.img }}" alt="Komiks z xkcd - {{ xkcdImage.alt }}" class="error-page--image">
+        <a href="https://xkcd.org/{{ xkcdImage.num }}">
+            <img src="{{ xkcdImage.img }}" alt="Komiks z xkcd - {{ xkcdImage.alt }}" class="error-page--image">
+        </a>
     </main>
 {% endblock %}
