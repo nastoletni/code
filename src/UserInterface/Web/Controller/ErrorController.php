@@ -42,7 +42,8 @@ class ErrorController extends AbstractController
      * Takes care of all common things to these error pages, such as image from xkcd.
      *
      * @param Response $response
-     * @param int $error
+     * @param int      $error
+     *
      * @return Response
      */
     private function render(Response $response, int $error): Response
@@ -54,7 +55,7 @@ class ErrorController extends AbstractController
         $xkcdImage = json_decode($xkcdResponse, true);
 
         return $this->twig->render($response, 'error.twig', [
-            'error' => $error,
+            'error'     => $error,
             'xkcdImage' => $xkcdImage
         ])
             ->withStatus($error);
