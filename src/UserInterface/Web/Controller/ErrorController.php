@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Nastoletni\Code\UserInterface\Web\Controller;
 
+use Nastoletni\Code\Domain\XkcdRepository;
 use Nastoletni\Code\UserInterface\Controller\AbstractController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -11,6 +12,21 @@ use Throwable;
 
 class ErrorController extends AbstractController
 {
+    /**
+     * @var XkcdRepository
+     */
+    private $xkcdRepository;
+
+    /**
+     * ErrorController constructor.
+     *
+     * @param XkcdRepository $xkcdRepository
+     */
+    public function __construct(XkcdRepository $xkcdRepository)
+    {
+        $this->xkcdRepository = $xkcdRepository;
+    }
+
     /**
      * Handling 404 Not found.
      *
@@ -48,15 +64,9 @@ class ErrorController extends AbstractController
      */
     private function render(Response $response, int $error): Response
     {
-        // FIXME: Maybe split this to separate repository?
-        // 1851th is the last xkcd's comic available at the time of writing this.
-        $number = random_int(1, 1851);
-        $xkcdResponse = file_get_contents(sprintf('http://xkcd.com/%d/info.0.json', $number));
-        $xkcdImage = json_decode($xkcdResponse, true);
-
         return $this->twig->render($response, 'error.twig', [
             'error'     => $error,
-            'xkcdImage' => $xkcdImage
+            'xkcdImage' => $this->xkcdRepository->getRandom(),
         ])
             ->withStatus($error);
     }

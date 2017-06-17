@@ -11,6 +11,7 @@ use Monolog\Logger;
 use Nastoletni\Code\Infrastructure\AES256Crypter;
 use Nastoletni\Code\Infrastructure\Dbal\DbalPasteMapper;
 use Nastoletni\Code\Infrastructure\Dbal\DbalPasteRepository;
+use Nastoletni\Code\Infrastructure\HttpsXkcdRepository;
 use Nastoletni\Code\Slim\DecoratingCallableResolver;
 use Nastoletni\Code\Slim\Middleware\SymfonySessionMiddleware;
 use Nastoletni\Code\Twig\SymfonyValidatorExtension;
@@ -147,7 +148,9 @@ class AppKernel
             /** @var ControllerDecorator $controllerDecorator */
             $controllerDecorator = $container['controllerDecorator'];
 
-            $errorController = new ErrorController();
+            $errorController = new ErrorController(
+                new HttpsXkcdRepository()
+            );
             $controllerDecorator->decorate($errorController);
 
             return $errorController;
