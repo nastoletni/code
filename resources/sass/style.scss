@@ -11,10 +11,22 @@ pre code {
   color: #fff;
 }
 
-.main__centered {
-  height: calc(100vh - 199px); // 129px footer + 70px header
+.error-page {
+  min-height: calc(100vh - 199px); // 129px footer + 70px header
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 50px 0;
+
+  &--title {
+    margin-bottom: 30px;
+    font-size: 54px;
+  }
+
+  &--image {
+    display: block;
+    padding: 0 15px;
+    object-fit: contain;
+  }
 }
