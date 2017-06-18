@@ -8,7 +8,12 @@
 
 {% block main %}
     <main class="main">
-        <h2>{{ paste.title }}</h2>
+        <h2 class="paste-title">
+            {{ paste.title }}
+            <time datetime="{{ paste.createdAt|date(constant('DATE_W3C')) }}" class="paste-title--date">
+                {{ paste.createdAt|date('H:i d-m-Y') }}
+            </time>
+        </h2>
         {% for file in paste.files %}
             <section class="panel">
                 <header class="panel-header">
