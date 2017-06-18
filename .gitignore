@@ -4,4 +4,5 @@
 /vendor/
 /build/
 /src/config.yml
-/web/style.css
+/web/*.css
+/web/*.min.js
