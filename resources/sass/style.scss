@@ -30,3 +30,8 @@ pre code {
     object-fit: contain;
   }
 }
+
+.ad {
+  @extend %container;
+  display: block;
+}
