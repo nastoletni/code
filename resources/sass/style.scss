@@ -30,3 +30,35 @@ pre code {
     object-fit: contain;
   }
 }
+
+.drop-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+  padding: 10vmin;
+  background: transparentize($primaryColor, .2);
+  transition: .3s opacity, .3s visibility;
+
+  &__active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &--text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border: 10px dashed #fff;
+    border-radius: 5vmin;
+    padding: 5vmin;
+    color: #fff;
+    font-size: 5vmin;
+    font-weight: bold;
+  }
+}

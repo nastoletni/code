@@ -38,7 +38,7 @@ const NewFormButton = {
 };
 
 const DragAndDrop = {
-  PLACEHOLDER_QUERY: '.drop--placeholder',
+  PLACEHOLDER_QUERY: '.drop-overlay',
   FILE_FORM_QUERY: '.code-form--file',
 
   init() {
@@ -146,11 +146,11 @@ const DragAndDrop = {
   },
 
   showPlaceholder() {
-    this.placeholder.classList.add('drop--placeholder__active');
+    this.placeholder.classList.add('drop-overlay__active');
   },
 
   hidePlaceholder() {
-    this.placeholder.classList.remove('drop--placeholder__active');
+    this.placeholder.classList.remove('drop-overlay__active');
   },
 };
 
