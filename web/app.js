@@ -123,11 +123,11 @@ const DragAndDrop = {
   },
 
   isFile(event) {
-    return event.dataTransfer.types.some(type => type === "Files");
+    return event.dataTransfer.types.some(type => type === 'Files');
   },
 
   isReadable(file) {
-    return file.type.indexOf("text") == 0;
+    return file.type.indexOf('text') == 0 || file.type.indexOf('application') == 0;
   },
 
   getFileName(file) {
