@@ -5,3 +5,6 @@
 /build/
 /src/config.yml
 /web/style.css
+
+.DS_STORE
+*/.DS_STORE
