@@ -38,8 +38,8 @@ const NewFormButton = {
 };
 
 const DragAndDrop = {
-  PLACEHOLDER_QUERY: '.drop-overlay',
   FILE_FORM_QUERY: '.code-form--file',
+  OVERLAY_WRAPPER_QUERY: '.main',
   ALLOWED_MIME_TYPES: [
     '',
     'text/h323',
@@ -168,8 +168,8 @@ const DragAndDrop = {
 
   init() {
     this.lastTarget = null;
-    this.placeholder = document.querySelector(this.PLACEHOLDER_QUERY);
 
+    this.appendOverlay();
     this.handleDragEnter();
     this.handleDragLeave();
     this.handleDragOver();
@@ -180,7 +180,7 @@ const DragAndDrop = {
     window.addEventListener("dragenter", (event) => {
       if (this.isFile(event)) {
         this.lastTarget = event.target;
-        this.showPlaceholder();
+        this.showOverlay();
       }
     });
   },
@@ -190,7 +190,7 @@ const DragAndDrop = {
       event.preventDefault();
 
       if (event.target === this.lastTarget) {
-        this.hidePlaceholder();
+        this.hideOverlay();
       }
     });
   },
@@ -204,7 +204,7 @@ const DragAndDrop = {
   handleDrop() {
     window.addEventListener("drop", (event) => {
       event.preventDefault();
-      this.hidePlaceholder();
+      this.hideOverlay();
 
       const files = [...event.dataTransfer.files]
         .filter(file => this.isReadable(file));
@@ -272,12 +272,38 @@ const DragAndDrop = {
     });
   },
 
-  showPlaceholder() {
-    this.placeholder.classList.add('drop-overlay__active');
+  getOverlayElement() {
+    const element =  document.createElement('div');
+    element.classList.add('drop-overlay');
+
+    return element;
   },
 
-  hidePlaceholder() {
-    this.placeholder.classList.remove('drop-overlay__active');
+  getOverlayTextElement() {
+    const element =  document.createElement('p');
+    element.classList.add('drop-overlay--text');
+    element.innerHTML = 'Upuść pliki tutaj';
+
+    return element;
+  },
+
+  appendOverlay() {
+    const overlayWrapper = document.querySelector(this.OVERLAY_WRAPPER_QUERY);
+    const overlayElement = this.getOverlayElement();
+    const overlayTextElement = this.getOverlayTextElement();
+
+    overlayElement.appendChild(overlayTextElement);
+    overlayWrapper.appendChild(overlayElement);
+
+    this.overlay = overlayElement;
+  },
+
+  showOverlay() {
+    this.overlay.classList.add('drop-overlay__active');
+  },
+
+  hideOverlay() {
+    this.overlay.classList.remove('drop-overlay__active');
   },
 };
 
