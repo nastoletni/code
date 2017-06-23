@@ -1,5 +1,10 @@
 {% extends 'layout.twig' %}
 
+{% block head %}
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    {{ parent() }}
+{% endblock %}
+
 {% block main %}
     <main class="main">
         <section class="panel panel-content">
@@ -38,8 +43,10 @@
             </form>
         </section>
     </main>
+    <ins class="adsbygoogle ad" data-ad-client="ca-pub-3857451114159786" data-ad-slot="4249001354" data-ad-format="auto"></ins>
 {% endblock %}
 
 {% block js %}
     <script src="app.js"></script>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 {% endblock %}

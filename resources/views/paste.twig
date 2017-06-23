@@ -3,12 +3,17 @@
 {% block title %}{{ paste.title is not empty ? paste.title : 'Podgląd wklejki ' ~ paste.id.base62Id }} - {{ parent() }}{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/mono-blue.min.css">
+    <link rel="stylesheet" href="{{ base_url() }}mono-blue.css">
 {% endblock %}
 
 {% block main %}
     <main class="main">
-        <h2>{{ paste.title }}</h2>
+        <h2 class="paste-title">
+            {{ paste.title }}
+            <time datetime="{{ paste.createdAt|date(constant('DATE_W3C')) }}" class="paste-title--date">
+                {{ paste.createdAt|date('H:i d-m-Y') }}
+            </time>
+        </h2>
         {% for file in paste.files %}
             <section class="panel">
                 <header class="panel-header">
@@ -21,6 +26,12 @@
 {% endblock %}
 
 {% block js %}
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="{{ base_url() }}highlight.pack.min.js"></script>
+    <script src="{{ base_url() }}timeago.min.js"></script>
+    <script src="{{ base_url() }}timeago.locales.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+
+        timeago(null, 'pl').render(document.querySelectorAll('.paste-title--date'));
+    </script>
 {% endblock %}
