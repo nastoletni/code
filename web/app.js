@@ -31,54 +31,6 @@ const Fieldset = {
   },
 };
 
-const ErrorPopup = {
-  POPUP_WRAPPER_QUERY: '.main',
-  POPUP_QUERY: '.site-popup--error',
-  POPUP_OVERLAY_QUERY: '.site-popup__overlay',
-  POPUP_CLOSE_ICON_QUERY: '.site-popup__close-icon',
-
-  init() {
-    this.popupWrapper = document.querySelector(this.POPUP_WRAPPER_QUERY);
-
-    const popup = this.getElement();
-    this.popupWrapper.appendChild(popup);
-
-    this.popup = document.querySelector(this.POPUP_QUERY);
-
-    this.handleOverlayClick();
-    this.handleCloseIconClick();
-  },
-
-  handleOverlayClick() {
-    const popupOverlay = document.querySelector(this.POPUP_OVERLAY_QUERY);
-    popupOverlay.addEventListener('click', () => hide());
-  },
-
-  handleCloseIconClick() {
-    const popupCloseIcon = document.querySelector(this.POPUP_CLOSE_ICON_QUERY);
-    popupCloseIcon.addEventListener('click', () => hide());
-  },
-
-  getElement() {
-    const popup = document.createElement('div');
-    popup.classList.add('site-popup--error');
-    popup.innerHTML = `<p class="site-popup__text">Niektóre pliki nie zostały dodane ponieważ posiadają
-                        nieobsługiwane rozszerzenie. Upewnij się, że chcesz przesłać odpowiednie pliki!</p>
-                        <i class="site-popup__close-icon"></i>
-                        <div class="site-popup__overlay"></div>`;
-
-    return popup;
-  },
-
-  show() {
-    this.popup.classList.add('site-popup--active');
-  },
-
-  hide() {
-    this.popup.classList.remove('site-popup--active');
-  }
-}
-
 const NewFormButton = {
   BUTTON_QUERY: '#new-file',
 
@@ -137,13 +89,7 @@ const DragAndDrop = {
       this.hideOverlay();
 
       const files = [...event.dataTransfer.files]
-        .filter((file) => {
-          if (this.isReadable(file)) {
-            return true;
-          } else {
-            ErrorPopup.show();
-          }
-        });
+          .filter(file => this.isReadable(file));
 
       if (files.length === 0) {
         return;
@@ -237,4 +183,3 @@ const DragAndDrop = {
 
 DragAndDrop.init();
 NewFormButton.init();
-ErrorPopup.init();
