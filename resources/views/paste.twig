@@ -1,9 +1,14 @@
 {% extends 'layout.twig' %}
 
-{% block title %}{{ paste.title is not empty ? paste.title : 'Podgląd wklejki ' ~ paste.id.base62Id }} - {{ parent() }}{% endblock %}
+{% set title = paste.title is not empty ? paste.title : 'Podgląd wklejki ' ~ paste.id.base62Id %}
+
+{% block title %}{{ title }} - {{ parent() }}{% endblock %}
 
 {% block head %}
+    <meta name="og:title" content="{{ title }} - Code">
+    <meta name="og:description" content="Code jest otwarto-źródłową wklejką z funkcjonalnościami takimi jak drag 'n drop i obsługa więcej niż jednego pliku. Zachowuje prywatność wklejek, każdy plik jest szyfrowany przy użyciu algorytmu AES-256-CBC i jedyną osobą, która zna klucz, jesteś ty i każdy, komu wyślesz linka.">
     <link rel="stylesheet" href="{{ base_url() }}mono-blue.css">
+    {{ parent() }}
 {% endblock %}
 
 {% block main %}
