@@ -1,10 +1,10 @@
 {% extends 'layout.twig' %}
 
 {% block main %}
-    <main class="main error-page">
-        <h2 class="error-page--title">Błąd {{ error }}</h2>
+    <main class="main code-error-page">
+        <h2 class="code-error-page--title">Błąd {{ error }}</h2>
         <a href="{{ xkcdImage.url }}">
-            <img src="{{ xkcdImage.imageUrl }}" alt="Komiks z xkcd - {{ xkcdImage.alternateText }}" class="error-page--image">
+            <img src="{{ xkcdImage.imageUrl }}" alt="Komiks z xkcd - {{ xkcdImage.alternateText }}" class="code-error-page--image">
         </a>
     </main>
 {% endblock %}

@@ -8,9 +8,9 @@
 
 {% block main %}
     <main class="main">
-        <h2 class="paste-title">
+        <h2 class="code-paste-title">
             {{ paste.title }}
-            <time datetime="{{ paste.createdAt|date(constant('DATE_W3C')) }}" class="paste-title--date">
+            <time datetime="{{ paste.createdAt|date(constant('DATE_W3C')) }}" class="code-paste-title--date">
                 {{ paste.createdAt|date('H:i d-m-Y') }}
             </time>
         </h2>
@@ -19,7 +19,7 @@
                 <header class="panel-header">
                     <h3 class="panel-title">{{ file.filename|default('Bez tytułu') }}</h3>
                 </header>
-                <pre><code>{{ file.content }}</code></pre>
+                <pre><code class="code-paste-content">{{ file.content }}</code></pre>
             </section>
         {% endfor %}
     </main>
@@ -32,6 +32,6 @@
     <script>
         hljs.initHighlightingOnLoad();
 
-        timeago(null, 'pl').render(document.querySelectorAll('.paste-title--date'));
+        timeago(null, 'pl').render(document.querySelectorAll('.code-paste-title--date'));
     </script>
 {% endblock %}
