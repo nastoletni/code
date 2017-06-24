@@ -64,8 +64,8 @@ pre code {
 }
 
 .ad {
-  @extend %container;
   display: block;
+  text-align: center;
 }
 
 .paste-title {
