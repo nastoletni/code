@@ -7,8 +7,8 @@
 
 {% block main %}
     <main class="main">
-        <p class="featured-text">Nastoletni Code jest wciąż rozwijane. Jeżeli uważasz, że jakaś funkcja powinna zostać dodana lub znalazłeś jakiś błąd, poinformuj nas o tym. <a href="https://github.com/nastoletni/code/issues/new">Utwórz nową issue na GitHubie.</a>
-            Miło by było, jakbyś dodał naszą stronę do wyjątków w AdBlocku, bo serwer jest utrzymywany tylko przez reklamy i naszą własną kieszeń.</p>
+        <p class="featured-text">Code jest otwarto-źródłową wklejką z funkcjonalnościami takimi jak drag&nbsp;'n&nbsp;drop i obsługa więcej niż jednego pliku. Zachowuje prywatność wklejek,
+        każdy plik jest szyfrowany przy użyciu algorytmu AES-256-CBC i jedyną osobą, która zna klucz, jesteś ty i każdy, komu wyślesz linka.</p>
         <section class="panel panel-content">
             <h2 class="panel-title">Dodaj nowy</h2>
             <form action="{{ path_for('create') }}" method="post" class="code-form">
