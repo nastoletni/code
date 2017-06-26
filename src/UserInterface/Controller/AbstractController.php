@@ -39,15 +39,32 @@ abstract class AbstractController
         $this->session = $session;
     }
 
+    /**
+     * Adds given value to the flashed variables bag.
+     *
+     * @param string $name
+     * @param        $value
+     */
     protected function flash(string $name, $value): void
     {
         $this->session->getFlashBag()->add($name, $value);
     }
 
+    /**
+     * Returns flashed value with given name.
+     *
+     * @param string $name
+     *
+     * @return mixed|null
+     */
     protected function getFlash(string $name)
     {
-        if (isset($this->session->getFlashBag()->get($name)[0])) {
-            return $this->session->getFlashBag()->get($name)[0];
+        if (false == $this->session->getFlashBag()->has($name)) {
+            return null;
         }
+
+        $flash = $this->session->getFlashBag()->get($name);
+
+        return $flash[0] ?? null;
     }
 }
