@@ -19,7 +19,7 @@ const Fieldset = {
       `<label class="code-form--label" for="name[${index}]">Nazwa pliku (opcjonalna)</label>
        <input type="text" id="name[${index}]" name="name[${index}]" class="code-form--control">
        <label for="content[${index}]" class="code-form--label">Treść pliku</label>
-       <textarea name="content[${index}]" id="content[${index}]" rows="10" class="code-form--control code-form--control__textarea"></textarea>`;
+       <textarea name="content[${index}]" id="content[${index}]" rows="10" class="code-form--control code-form--control__textarea" required></textarea>`;
 
     return fieldset;
   },
