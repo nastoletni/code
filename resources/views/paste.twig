@@ -20,8 +20,8 @@
             </time>
         </h2>
         {% for file in paste.files %}
-            <section class="panel">
-                <header class="panel-header">
+            <section class="panel code-file">
+                <header class="panel-header code-file--header">
                     <h3 class="panel-title">{{ file.filename|default('Bez tytułu') }}</h3>
                 </header>
                 <pre><code class="code-paste-content">{{ file.content }}</code></pre>
