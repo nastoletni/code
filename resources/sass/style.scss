@@ -23,6 +23,12 @@ body {
       background: none;
     }
   }
+
+  @media (max-width: 800px) {
+    .page-navbar-nav--link {
+      color: #fff;
+    }
+  }
 }
 
 .lead-block {
