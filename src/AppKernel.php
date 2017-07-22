@@ -131,6 +131,7 @@ class AppKernel
             return DriverManager::getConnection([
                 'driver'   => 'pdo_mysql',
                 'host'     => $container['config']['database']['host'],
+                'port'     => $container['config']['database']['port'],
                 'dbname'   => $container['config']['database']['name'],
                 'user'     => $container['config']['database']['user'],
                 'password' => $container['config']['database']['password'],
