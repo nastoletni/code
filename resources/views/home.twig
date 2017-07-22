@@ -9,9 +9,10 @@
 {% endblock %}
 
 {% block main %}
+    <div class="lead lead-block">
+        <div class="lead-block--container">Code jest otwarto-źródłową wklejką z funkcjonalnościami takimi jak drag&nbsp;'n&nbsp;drop i obsługa więcej niż jednego pliku. Zachowuje prywatność wklejek, każdy plik jest szyfrowany przy użyciu algorytmu AES-256-CBC i jedyną osobą, która zna klucz, jesteś ty i każdy, komu wyślesz linka.</div>
+    </div>
     <main class="main">
-        <p class="lead">Code jest otwarto-źródłową wklejką z funkcjonalnościami takimi jak drag&nbsp;'n&nbsp;drop i obsługa więcej niż jednego pliku. Zachowuje prywatność wklejek,
-        każdy plik jest szyfrowany przy użyciu algorytmu AES-256-CBC i jedyną osobą, która zna klucz, jesteś ty i każdy, komu wyślesz linka.</p>
         <section class="panel panel-content">
             <h2 class="panel-title">Dodaj nowy</h2>
             <form action="{{ path_for('create') }}" method="post" class="code-form">

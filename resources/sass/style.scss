@@ -1,1 +1,71 @@
 @import './../../node_modules/nastoletni-sass/src/style';
+
+html {
+  background: #fff;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-navbar__inverse {
+  color: $primaryColor;
+  background: none;
+  line-height: 80px;
+
+  .page-navbar--title-link,
+  .page-navbar-nav--link {
+    color: $primaryColor;
+
+    &:hover {
+      background: none;
+    }
+  }
+}
+
+.lead-block {
+  margin-bottom: 0;
+  padding: 50px 15px;
+  color: #fff;
+  background: $primaryColor;
+
+  &--container {
+    @extend %container;
+  }
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+}
+
+.code-form {
+  &--label {
+    margin-bottom: 5px !important;
+  }
+
+  &--control {
+    border: 2px solid #ced9e4;
+  }
+
+  &--button {
+    border: 0;
+    padding: 12px 24px;
+  }
+}
+
+.fullwidth-ad {
+  margin-bottom: 30px;
+}
+
+.footer {
+  padding: 50px 0;
+  background: #333;
+  color: #fff;
+
+  a {
+    color: #fff;
+  }
+}

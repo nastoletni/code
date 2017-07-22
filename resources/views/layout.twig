@@ -9,7 +9,7 @@
         {% block head '' %}
     </head>
     <body>
-        <header class="page-navbar">
+        <header class="page-navbar page-navbar__inverse">
             <div class="page-navbar--container">
                 <h1 class="page-navbar--title">
                     <a href="{{ path_for('home') }}" class="page-navbar--title-link">
@@ -20,7 +20,9 @@
                 <nav class="page-navbar--navigation page-navbar-nav">
                     <h2 class="page-navbar-nav--title">Nawigacja</h2>
                     <ul class="page-navbar-nav--links">
-                        <li class="page-navbar-nav--links-item"><a href="https://nastoletni.pl" class="page-navbar-nav--link">Powrót na nastoletni.pl</a></li>
+                        <li class="page-navbar-nav--links-item">
+                            <a href="https://nastoletni.pl" class="page-navbar-nav--link">Powrót na nastoletni.pl</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
