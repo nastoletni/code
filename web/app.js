@@ -46,7 +46,7 @@ const NewFormButton = {
 
 const DragAndDrop = {
   FILE_FORM_QUERY: '.code-form--file',
-  OVERLAY_WRAPPER_QUERY: '.main',
+  OVERLAY_WRAPPER_QUERY: 'body',
 
   init() {
     this.lastTarget = null;
