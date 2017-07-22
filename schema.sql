@@ -23,6 +23,6 @@ create table pastes
 
 alter table files
 	add constraint files_pastes_id_fk
-		foreign key (paste_id) references code.pastes (id)
+		foreign key (paste_id) references pastes (id)
 ;
 
