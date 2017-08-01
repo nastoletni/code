@@ -60,7 +60,7 @@ abstract class AbstractController
     protected function getFlash(string $name)
     {
         if (false == $this->session->getFlashBag()->has($name)) {
-            return null;
+            return;
         }
 
         $flash = $this->session->getFlashBag()->get($name);

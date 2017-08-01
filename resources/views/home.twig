@@ -17,7 +17,7 @@
             <h2 class="panel-title">Dodaj nowy</h2>
             <form action="{{ path_for('create') }}" method="post" class="code-form">
                 <label for="title" class="code-form--label">Tytuł wklejki</label>
-                <input type="text" id="title" name="title" class="code-form--control code-form--control__title" value="{{ old.title }}" placeholder="Na przykład: Zadanie #7 na SPOJu" required>
+                <input type="text" id="title" name="title" class="code-form--control code-form--control__title" value="{{ old.title }}" placeholder="Na przykład: Zadanie #7 na SPOJu">
                 {% for error in error('[title]', errors) %}
                     <p class="code-form--error">{{ error }}</p>
                 {% endfor %}

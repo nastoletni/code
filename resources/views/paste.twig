@@ -14,7 +14,7 @@
 {% block main %}
     <main class="main">
         <h2 class="code-paste-title">
-            {{ paste.title }}
+            {{ paste.title is not empty ? paste.title : 'Bez nazwy' }}
             <time datetime="{{ paste.createdAt|date(constant('DATE_W3C')) }}" class="code-paste-title--date">
                 {{ paste.createdAt|date('H:i d-m-Y') }}
             </time>

@@ -77,7 +77,7 @@ class CreatePasteFormValidatorTest extends TestCase
                         'Test',
                     ],
                 ],
-                1,
+                0,
             ],
             [
                 [
@@ -89,7 +89,7 @@ class CreatePasteFormValidatorTest extends TestCase
                         '',
                     ],
                 ],
-                2,
+                1,
             ],
             [
                 [
