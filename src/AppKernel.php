@@ -15,6 +15,7 @@ use Nastoletni\Code\Infrastructure\HttpsXkcdRepository;
 use Nastoletni\Code\Slim\DecoratingCallableResolver;
 use Nastoletni\Code\Slim\Middleware\SymfonySessionMiddleware;
 use Nastoletni\Code\Twig\SymfonyValidatorExtension;
+use Nastoletni\Code\Twig\TransExtension;
 use Nastoletni\Code\UserInterface\Controller\ControllerDecorator;
 use Nastoletni\Code\UserInterface\Web\Controller\ErrorController;
 use Nastoletni\Code\UserInterface\Web\Controller\PasteController;
@@ -26,6 +27,8 @@ use Slim\Handlers\Strategies\RequestResponseArgs;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Translation\Loader\PhpFileLoader;
+use Symfony\Component\Translation\Translator;
 use Symfony\Component\Yaml\Yaml;
 
 class AppKernel
@@ -100,12 +103,23 @@ class AppKernel
                 $next
             );
         };
+        $container['translator'] = function (Container $container) {
+            $translator = new Translator($container['config']['locale']);
+            $translator->setFallbackLocales(['en']);
+
+            $translator->addLoader('php', new PhpFileLoader());
+            $translator->addResource('php', __DIR__.'/../resources/translations/messages.php', 'en');
+            $translator->addResource('php', __DIR__.'/../resources/translations/messages.pl.php', 'pl');
+
+            return $translator;
+        };
         $container['twig'] = function (Container $container) {
             $twig = new Twig(__DIR__.'/../resources/views/', [
                 'debug' => $container['config']['debug'],
             ]);
             $twig->addExtension(new TwigExtension($container['router'], $container['config']['base_url']));
             $twig->addExtension(new SymfonyValidatorExtension());
+            $twig->addExtension(new TransExtension($container['translator']));
 
             return $twig;
         };

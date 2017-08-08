@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b151920a1d957e3f7c24c6fafa1b7a03",
+    "content-hash": "ab5f7be63bd55e7d04cb9c609f10d71c",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1059,7 +1059,7 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v3.3.5",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",

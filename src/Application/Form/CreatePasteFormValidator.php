@@ -39,12 +39,12 @@ class CreatePasteFormValidator
         $validator = Validation::createValidator();
 
         $constraint = new Assert\Collection([
-            'title' => new Assert\NotNull(),
+            'title' => new Assert\NotNull(['message' => 'validator.title.not_null']),
             'name'  => new Assert\All([
-                new Assert\NotNull(),
+                new Assert\NotNull(['message' => 'validator.name.not_null']),
             ]),
             'content' => new Assert\All([
-                new Assert\NotBlank(),
+                new Assert\NotBlank(['message' => 'validator.content.not_blank']),
             ]),
         ]);
 

@@ -19,7 +19,7 @@
                 <label for="title" class="code-form--label">Tytuł wklejki</label>
                 <input type="text" id="title" name="title" class="code-form--control code-form--control__title" value="{{ old.title }}" placeholder="Na przykład: Zadanie #7 na SPOJu">
                 {% for error in error('[title]', errors) %}
-                    <p class="code-form--error">{{ error }}</p>
+                    <p class="code-form--error">{{ error|trans }}</p>
                 {% endfor %}
                 {% for i, input in old.content %}
                     <fieldset class="code-form--file" data-index="{{ i }}">
@@ -31,12 +31,12 @@
                             {% endif %}
                         </div>
                         {% for error in error('[name][' ~ i ~ ']', errors) %}
-                            <p class="code-form--error">{{ error }}</p>
+                            <p class="code-form--error">{{ error|trans }}</p>
                         {% endfor %}
                         <label for="content[{{ i }}]" class="code-form--label">Treść pliku</label>
                         <textarea id="content[{{ i }}]" name="content[{{ loop.index0 }}]" rows="10" class="code-form--control code-form--control__textarea" required>{{ attribute(old.content, i) }}</textarea>
                         {% for error in error('[content][' ~ i ~ ']', errors) %}
-                            <p class="code-form--error">{{ error }}</p>
+                            <p class="code-form--error">{{ error|trans }}</p>
                         {% endfor %}
                     </fieldset>
                 {% else %}
