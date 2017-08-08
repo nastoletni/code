@@ -52,6 +52,20 @@ body {
     margin-bottom: 5px !important;
   }
 
+  &--control-group {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &--control-group-fill {
+    flex: 1;
+    margin-right: 15px;
+
+    @media (max-width: $mobileWidth) {
+      margin-right: 5px;
+    }
+  }
+
   &--control {
     border: 2px solid #ced9e4;
   }
@@ -59,6 +73,19 @@ body {
   &--button {
     border: 0;
     padding: 12px 24px;
+
+    &__delete {
+      $red: #e74c3c;
+      margin-left: 0;
+      align-self: flex-start;
+      flex: 0 0 auto;
+      background: $red;
+      color: #fff;
+
+      &:hover, &:focus {
+        background: darken($red, 15%);
+      }
+    }
   }
 }
 

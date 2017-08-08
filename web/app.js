@@ -1,4 +1,5 @@
 const Fieldset = {
+  SPECIFIED_FORM_QUERY: '.code-form--file[data-index="%d"]',
   LAST_FORM_QUERY: '.code-form--file:last-of-type',
 
   addNew() {
@@ -6,7 +7,20 @@ const Fieldset = {
     const newForm = this.getElement();
     const formsWrapper = lastForm.parentNode;
 
+    newForm.querySelector('.code-form--button__delete').addEventListener('click', this.remove.bind(this));
     formsWrapper.insertBefore(newForm, lastForm.nextSibling);
+  },
+
+  remove(event) {
+      const index = parseInt(event.target.parentNode.parentNode.getAttribute('data-index'));
+
+      if (index === 0) {
+          return;
+      }
+
+      // Add 3 because: +1 because [data-index] is 0-indexed and +2 because we've got two elements before.
+      const form = document.querySelector(this.SPECIFIED_FORM_QUERY.replace(/%d/, index));
+      form.parentNode.removeChild(form);
   },
 
   getElement() {
@@ -17,7 +31,10 @@ const Fieldset = {
 
     fieldset.innerHTML =
       `<label class="code-form--label" for="name[${index}]">Nazwa pliku (opcjonalna)</label>
-       <input type="text" id="name[${index}]" name="name[${index}]" class="code-form--control">
+      <div class="code-form--control-group">
+         <input type="text" id="name[${index}]" name="name[${index}]" class="code-form--control code-form--control__filename code-form--control-group-fill">
+         <button type="button" class="code-form--button code-form--button__delete">Usuń plik</button>
+       </div>
        <label for="content[${index}]" class="code-form--label">Treść pliku</label>
        <textarea name="content[${index}]" id="content[${index}]" rows="10" class="code-form--control code-form--control__textarea" required></textarea>`;
 

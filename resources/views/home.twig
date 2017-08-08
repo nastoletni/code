@@ -24,7 +24,12 @@
                 {% for i, input in old.content %}
                     <fieldset class="code-form--file" data-index="{{ i }}">
                         <label for="name[{{ i }}]" class="code-form--label">Nazwa pliku (opcjonalna)</label>
-                        <input type="text" id="name[{{ i }}]" name="name[{{ i }}]" class="code-form--control" value="{{ attribute(old.name, i) }}" {% if i == 0 %}placeholder="Na przykład: main.cpp"{% endif %}>
+                        <div class="code-form--control-group">
+                            <input type="text" id="name[{{ i }}]" name="name[{{ i }}]" class="code-form--control code-form--control__filename code-form--control-group-fill" value="{{ attribute(old.name, i) }}" {% if i == 0 %}placeholder="Na przykład: main.cpp"{% endif %}>
+                            {% if i != 0 %}
+                                <button type="button" class="code-form--button code-form--button__delete">Usuń plik</button>
+                            {% endif %}
+                        </div>
                         {% for error in error('[name][' ~ i ~ ']', errors) %}
                             <p class="code-form--error">{{ error }}</p>
                         {% endfor %}
@@ -37,7 +42,7 @@
                 {% else %}
                     <fieldset class="code-form--file" data-index="0">
                         <label for="name[0]" class="code-form--label">Nazwa pliku (opcjonalna)</label>
-                        <input type="text" id="name[0]" name="name[0]" class="code-form--control" placeholder="Na przykład: main.cpp">
+                        <input type="text" id="name[0]" name="name[0]" class="code-form--control code-form--control__filename code-form--control-group-fill" placeholder="Na przykład: main.cpp">
                         <label for="content[0]" class="code-form--label">Treść pliku</label>
                         <textarea id="content[0]" name="content[0]" rows="10" class="code-form--control code-form--control__textarea" required></textarea>
                     </fieldset>
