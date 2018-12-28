@@ -6,9 +6,13 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![StyleCI][ico-styleci]][link-styleci]
 
+#### Visit [code.nastoletni.pl](https://code.nastoletni.pl/) and create your own paste!
+
 This is open source pastebin-like website with features like multifile pastes and drag'n'drop. It keeps privacy of pastes, each file is being encrypted using AES-256-CBC and the only person (*or computer*) that knows the key is you.
 
 We aim with this tool mainly for developers in mind and we want to keep it as usable and simple in use as we can. If you have any idea that could be implemented, [create a new issue](https://github.com/nastoletni/code/issues/new) and describe it. Any kind of feedback is welcome!
+
+![Website look](/images/website_look.png)
 
 ## Install
 
